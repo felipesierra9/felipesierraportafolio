@@ -3,59 +3,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio - Andrés Felipe Sierra Monroy</title>
+<title>Andrés Felipe Sierra Monroy — Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#333}
-header{background:#0d47a1;color:#fff;text-align:center;padding:50px 20px}
-img{width:180px;height:180px;border-radius:50%;object-fit:cover;border:5px solid #fff}
-main{max-width:900px;margin:auto;padding:20px}
-section{background:#fff;padding:25px;margin:20px 0;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-h2{color:#0d47a1}
-.video{border:2px dashed #1976d2;padding:20px;text-align:center}
-footer{text-align:center;background:#0d47a1;color:#fff;padding:20px}
+  :root{
+    --ink:#0a0e17;
+    --panel:#111726;
+    --panel-2:#161d2f;
+    --line:#232c42;
+    --text:#e9ecf4;
+    --muted:#8891a7;
+    --amber:#e8b14a;
+    --amber-dim:#8a6a2c;
+    --green:#59d19a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Inter',Arial,sans-serif;
+    line-height:1.6;
+  }
+  ::selection{background:var(--amber);color:var(--ink)}
+  a{color:var(--amber)}
+
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  .noise{
+    position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:0;
+    background-image:radial-gradient(circle at 1px 1px, #fff 1px, transparent 0);
+    background-size:24px 24px;
+  }
+
+  header{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px 24px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  header::before{
+    content:"";
+    position:absolute; inset:-40% -10% auto -10%;height:80%;
+    background:radial-gradient(ellipse at top, rgba(232,177,74,.10), transparent 60%);
+    pointer-events:none;
+  }
+
+  .eyebrow{
+    color:var(--amber);
+    letter-spacing:.08em;
+    font-size:13px;
+    margin:0 0 18px;
+  }
+  .eyebrow::before{content:"// "; color:var(--amber-dim)}
+
+  .hero-inner{
+    max-width:920px;
+    margin:0 auto;
+    width:100%;
+    position:relative;
+    z-index:1;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:40px;
+    align-items:center;
+  }
+
+  h1{
+    font-size:clamp(32px,6vw,54px);
+    line-height:1.08;
+    margin:0 0 12px;
+    font-weight:700;
+    letter-spacing:-.02em;
+  }
+  .role{
+    color:var(--muted);
+    font-size:clamp(15px,2.4vw,19px);
+    margin:0 0 28px;
+  }
+  .role .dot{color:var(--green)}
+
+  .avatar-wrap{
+    width:150px;height:150px;border-radius:14px;
+    padding:4px;
+    background:linear-gradient(160deg,var(--amber),var(--amber-dim));
+    justify-self:end;
+    flex-shrink:0;
+  }
+  .avatar-wrap img{
+    width:100%;height:100%;object-fit:cover;border-radius:11px;display:block;
+    background:var(--panel-2);
+  }
+
+  /* terminal */
+  .terminal{
+    margin-top:40px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  }
+  .terminal-bar{
+    display:flex;align-items:center;gap:8px;
+    padding:11px 14px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--line);
+  }
+  .terminal-bar span{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .terminal-bar span:nth-child(1){background:#ff5f56}
+  .terminal-bar span:nth-child(2){background:#ffbd2e}
+  .terminal-bar span:nth-child(3){background:#27c93f}
+  .terminal-title{margin-left:8px;color:var(--muted);font-size:12.5px}
+  .terminal-body{
+    padding:20px 22px 26px;
+    font-size:14.5px;
+  }
+  .terminal-body .line{margin:0 0 6px}
+  .prompt{color:var(--green)}
+  .path{color:var(--amber)}
+  .out{color:var(--muted)}
+  .caret{
+    display:inline-block;width:8px;height:16px;background:var(--amber);
+    margin-left:2px;vertical-align:-3px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+
+  main{max-width:920px;margin:0 auto;padding:10px 24px 40px;position:relative;z-index:1}
+
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:28px}
+  .sec-num{color:var(--amber-dim);font-size:13px}
+  h2{
+    font-size:22px;margin:0;
+    font-weight:600;
+    letter-spacing:-.01em;
+  }
+
+  p.lead{color:var(--muted);max-width:62ch;font-size:16px}
+
+  /* skills as commit log */
+  .log{border-left:2px solid var(--line);margin-left:6px}
+  .commit{
+    position:relative;
+    padding:0 0 26px 26px;
+  }
+  .commit:last-child{padding-bottom:0}
+  .commit::before{
+    content:"";position:absolute;left:-7px;top:4px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--ink);border:2px solid var(--amber);
+  }
+  .commit-hash{color:var(--amber);font-size:12.5px;margin-right:10px}
+  .commit-msg{font-weight:600;font-size:15.5px}
+  .commit-meta{color:var(--muted);font-size:13px;margin-top:3px}
+
+  /* objetivo */
+  .quote-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--amber);
+    border-radius:8px;
+    padding:24px 26px;
+  }
+
+  /* video */
+  .video-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .video-frame{
+    aspect-ratio:16/9;
+    background:var(--panel-2);
+    display:flex;align-items:center;justify-content:center;
+  }
+  video{width:100%;height:100%;display:block;object-fit:cover;background:#000}
+  .video-caption{
+    padding:16px 20px;
+    color:var(--muted);
+    font-size:13.5px;
+    border-top:1px solid var(--line);
+  }
+
+  /* contacto */
+  .config{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:22px 24px;
+    font-size:14.5px;
+  }
+  .config .row{display:flex;gap:10px;padding:6px 0;flex-wrap:wrap}
+  .config .key{color:var(--amber-dim)}
+  .config .key::after{content:":"}
+  .config .val{color:var(--text)}
+  .config a{text-decoration:none}
+  .config a:hover{text-decoration:underline}
+
+  footer{
+    text-align:center;
+    padding:32px 24px 48px;
+    color:var(--muted);
+    font-size:12.5px;
+  }
+
+  @media (max-width:640px){
+    .hero-grid{grid-template-columns:1fr;}
+    .avatar-wrap{justify-self:start}
+    header{min-height:auto;padding:48px 20px 40px}
+  }
+
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){
+    .caret{animation:none}
+    html{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
+<div class="noise"></div>
+
 <header>
-<img src="foto.jpg" alt="Foto de perfil">
-<h1>Andrés Felipe Sierra Monroy</h1>
-<p>Estudiante de Ingeniería de Sistemas • Universidad El Bosque • Cuarto semestre</p>
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow mono">portafolio</p>
+        <h1>Andrés Felipe<br>Sierra Monroy</h1>
+        <p class="role mono"><span class="dot">●</span> Estudiante de Ingeniería de Sistemas — 4.º semestre — Universidad El Bosque</p>
+      </div>
+      <div class="avatar-wrap">
+        <img src="foto.jpg" alt="Foto de perfil de Andrés Felipe Sierra Monroy">
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span></span><span></span><span></span>
+        <span class="terminal-title mono">afsierra@portafolio: ~</span>
+      </div>
+      <div class="terminal-body mono">
+        <p class="line"><span class="prompt">$</span> whoami</p>
+        <p class="line out">Estudiante de Ing. de Sistemas interesado en desarrollo de software y soluciones tecnológicas.</p>
+        <p class="line"><span class="prompt">$</span> cat objetivo.txt</p>
+        <p class="line out">Fortalecer conocimientos y ganar experiencia real en proyectos de desarrollo.</p>
+        <p class="line"><span class="prompt">$</span> <span class="caret"></span></p>
+      </div>
+    </div>
+  </div>
 </header>
+
 <main>
-<section>
-<h2>Sobre mí</h2>
-<p>Soy estudiante de Ingeniería de Sistemas con interés en el desarrollo de software, el aprendizaje continuo y la creación de soluciones tecnológicas.</p>
-</section>
-<section>
-<h2>Habilidades</h2>
-<ul>
-<li>Java</li>
-<li>Git y GitHub</li>
-<li>HTML</li>
-<li>Bases de Datos</li>
-<li>Trabajo en equipo</li>
-</ul>
-</section>
-<section>
-<h2>Objetivo profesional</h2>
-<p>Continuar fortaleciendo mis conocimientos y adquirir experiencia en proyectos de desarrollo de software.</p>
-</section>
-<section>
-<h2>Video de presentación</h2>
-<div class="video">
-<p>Aquí irá mi video de presentación.</p>
-<video controls width="100%">
-<source src="video.mp4" type="video/mp4">
-Tu navegador no soporta video.
-</video>
-</div>
-</section>
-<section>
-<h2>Contacto</h2>
-<p>Nombre: Andrés Felipe Sierra Monroy</p>
-<p>Universidad El Bosque</p>
-</section>
+
+  <section id="sobre-mi">
+    <div class="sec-head">
+      <span class="sec-num mono">01</span>
+      <h2>Sobre mí</h2>
+    </div>
+    <p class="lead">Soy estudiante de Ingeniería de Sistemas con interés en el desarrollo de software, el aprendizaje continuo y la creación de soluciones tecnológicas. Me gusta entender cómo funcionan las cosas por dentro y construir proyectos que resuelvan problemas reales.</p>
+  </section>
+
+  <section id="habilidades">
+    <div class="sec-head">
+      <span class="sec-num mono">02</span>
+      <h2>Habilidades</h2>
+    </div>
+    <div class="log">
+      <div class="commit">
+        <div><span class="commit-hash mono">a1f9c2e</span><span class="commit-msg">Java</span></div>
+        <div class="commit-meta mono">lógica de programación y estructuras de datos</div>
+      </div>
+      <div class="commit">
+        <div><span class="commit-hash mono">4b7d0aa</span><span class="commit-msg">Git &amp; GitHub</span></div>
+        <div class="commit-meta mono">control de versiones y trabajo colaborativo</div>
+      </div>
+      <div class="commit">
+        <div><span class="commit-hash mono">e30c118</span><span class="commit-msg">HTML</span></div>
+        <div class="commit-meta mono">maquetación y estructura web</div>
+      </div>
+      <div class="commit">
+        <div><span class="commit-hash mono">9f21bd4</span><span class="commit-msg">Bases de datos</span></div>
+        <div class="commit-meta mono">modelado y consultas</div>
+      </div>
+      <div class="commit">
+        <div><span class="commit-hash mono">c65a903</span><span class="commit-msg">Trabajo en equipo</span></div>
+        <div class="commit-meta mono">comunicación y colaboración en proyectos</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="objetivo">
+    <div class="sec-head">
+      <span class="sec-num mono">03</span>
+      <h2>Objetivo profesional</h2>
+    </div>
+    <div class="quote-card">
+      <p style="margin:0;color:var(--text)">Continuar fortaleciendo mis conocimientos y adquirir experiencia en proyectos de desarrollo de software, con miras a especializarme y aportar valor real a los equipos con los que trabaje.</p>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="sec-head">
+      <span class="sec-num mono">04</span>
+      <h2>Video de presentación</h2>
+    </div>
+    <div class="video-card">
+      <div class="video-frame">
+        <video controls preload="metadata">
+          <source src="video.mp4" type="video/mp4">
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      </div>
+      <p class="video-caption mono">video.mp4 — presentación personal (~2 min)</p>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="sec-head">
+      <span class="sec-num mono">05</span>
+      <h2>Contacto</h2>
+    </div>
+    <div class="config mono">
+      <div class="row"><span class="key">nombre</span><span class="val">Andrés Felipe Sierra Monroy</span></div>
+      <div class="row"><span class="key">universidad</span><span class="val">Universidad El Bosque</span></div>
+      <div class="row"><span class="key">programa</span><span class="val">Ingeniería de Sistemas — 4.º semestre</span></div>
+    </div>
+  </section>
+
 </main>
-<footer>© 2026 - Portafolio de Andrés Felipe Sierra Monroy</footer>
+
+<footer class="mono">© 2026 Andrés Felipe Sierra Monroy — construido con HTML y CSS</footer>
+
 </body>
 </html>
