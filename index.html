@@ -39,6 +39,27 @@
     background-size:24px 24px;
   }
 
+  /* ---------- menú de navegación ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:24px;
+    padding:14px 24px;
+    background:rgba(10,14,23,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+  }
+  .nav-brand{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--amber);
+    flex-shrink:0;margin-right:4px;
+  }
+  .nav-links{display:flex;gap:20px;list-style:none;margin:0;padding:0;white-space:nowrap}
+  .nav-links a{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);
+    text-decoration:none;transition:color .15s ease;
+  }
+  .nav-links a:hover,.nav-links a:focus-visible{color:var(--amber)}
+
   header{
     position:relative;
     min-height:92vh;
@@ -238,6 +259,18 @@
 <body>
 <div class="noise"></div>
 
+<nav class="nav">
+  <span class="nav-brand">AS/</span>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#objetivo">Objetivo</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
 <header>
   <div class="hero-inner">
     <div class="hero-grid">
@@ -350,9 +383,31 @@ Actualmente estoy construyendo mi camino profesional y buscando cada vez más op
     </div>
   </section>
 
-  <section id="contacto">
+  <section id="trabajos">
     <div class="sec-head">
       <span class="sec-num mono">05</span>
+      <h2>Trabajos</h2>
+    </div>
+    <p class="lead">Próximamente subiré aquí proyectos y trabajos académicos.</p>
+
+    <!--
+      CÓMO AGREGAR UN TRABAJO MÁS ADELANTE:
+      Copia el bloque de abajo (desde <div class="commit"> hasta </div> incluido)
+      y pégalo justo antes de </div> del .log. Cambia el título y la descripción.
+
+      <div class="commit">
+        <div><span class="commit-msg">Nombre del trabajo</span></div>
+        <div class="commit-meta mono">Breve descripción — materia o fecha</div>
+      </div>
+    -->
+    <div class="log">
+      <!-- aquí irán tus trabajos, uno por cada <div class="commit"> -->
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="sec-head">
+      <span class="sec-num mono">06</span>
       <h2>Contacto</h2>
     </div>
     <div class="config mono">
