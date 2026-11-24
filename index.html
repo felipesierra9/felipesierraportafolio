@@ -18,6 +18,7 @@
     --amber:#e8b14a;
     --amber-dim:#8a6a2c;
     --green:#59d19a;
+    --red:#f0787a;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -243,16 +244,265 @@
     font-size:12.5px;
   }
 
+  /* =====================================================
+     TRABAJOS — proyecto final interactivo
+     ===================================================== */
+  .proj-intro{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:24px 26px;
+    margin-bottom:22px;
+  }
+  .proj-intro h3{margin:0 0 6px;font-size:18px}
+  .proj-intro .meta{color:var(--muted);font-size:12.5px;margin:0 0 12px}
+  .proj-intro p{margin:0;color:var(--muted);font-size:15px}
+
+  .stats{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px;
+  }
+  .stat{
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:16px 10px;text-align:center;
+  }
+  .stat b{display:block;font-family:'IBM Plex Mono',monospace;font-size:28px;color:var(--amber);line-height:1.1}
+  .stat span{display:block;margin-top:4px;color:var(--muted);font-size:12px}
+
+  .tabs{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+    margin-bottom:18px;
+  }
+  .tab-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    background:var(--panel);color:var(--muted);
+    border:1px solid var(--line);border-radius:10px;
+    padding:14px 10px;cursor:pointer;text-align:center;
+    transition:all .15s ease;
+  }
+  .tab-btn small{display:block;font-size:11px;color:var(--amber-dim);margin-bottom:2px}
+  .tab-btn:hover{color:var(--text);border-color:var(--amber-dim)}
+  .tab-btn[aria-selected="true"]{
+    color:var(--ink);background:var(--amber);border-color:var(--amber);font-weight:600;
+  }
+  .tab-btn[aria-selected="true"] small{color:var(--ink);opacity:.7}
+
+  .panel-tools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .seg button{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--panel);color:var(--muted);
+    border:0;padding:8px 14px;cursor:pointer;transition:all .15s ease;
+  }
+  .seg button+button{border-left:1px solid var(--line)}
+  .seg button:hover{color:var(--text)}
+  .seg button[aria-pressed="true"]{background:var(--amber);color:var(--ink);font-weight:600}
+  .view-g{display:none}
+  body[data-view="g"] .view-p{display:none}
+  body[data-view="g"] .view-g{display:block}
+  .acc-body ol{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+  .acc-body ol li{margin:5px 0}
+  .acc-body ol li strong{color:var(--text)}
+  .score input{
+    width:56px;background:var(--ink);color:var(--text);border:1px solid var(--line);border-radius:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;padding:5px 6px;text-align:center;
+  }
+  .score input:focus{outline:2px solid var(--amber);outline-offset:1px}
+  .calc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+  .calc label{display:block;font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace}
+  .calc input{
+    width:100%;margin-top:4px;background:var(--ink);color:var(--text);border:1px solid var(--line);
+    border-radius:8px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;padding:9px 12px;
+  }
+  .calc input:focus{outline:2px solid var(--amber);outline-offset:1px}
+  .mini{margin-top:14px}
+  .mini-title{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--amber);margin-bottom:4px}
+  pre.diagram{line-height:1.35}
+  @media (max-width:640px){.calc{grid-template-columns:1fr}}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+    background:transparent;color:var(--muted);
+    border:1px solid var(--line);border-radius:6px;
+    padding:6px 12px;cursor:pointer;transition:all .15s ease;
+  }
+  .btn:hover{color:var(--amber);border-color:var(--amber-dim)}
+
+  .why{
+    background:linear-gradient(180deg,rgba(232,177,74,.08),rgba(232,177,74,.02));
+    border:1px solid var(--amber-dim);
+    border-radius:10px;padding:18px 22px;margin-bottom:16px;
+  }
+  .why h4{margin:0 0 6px;font-size:12.5px;color:var(--amber);letter-spacing:.06em;font-weight:600}
+  .why p{margin:0;font-size:15px}
+
+  .acc{
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    margin-bottom:10px;overflow:hidden;
+  }
+  .acc[open]{border-color:var(--amber-dim)}
+  .acc>summary{
+    list-style:none;cursor:pointer;
+    display:flex;align-items:center;gap:12px;
+    padding:16px 20px;font-weight:600;font-size:15.5px;
+  }
+  .acc>summary::-webkit-details-marker{display:none}
+  .acc>summary::before{
+    content:"▸";color:var(--amber);font-size:13px;transition:transform .2s ease;
+  }
+  .acc[open]>summary::before{transform:rotate(90deg)}
+  .acc>summary .tag{
+    margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:2px 10px;white-space:nowrap;
+  }
+  .acc>summary:hover{background:var(--panel-2)}
+  .acc-body{padding:4px 20px 22px;border-top:1px solid var(--line);font-size:14.5px}
+  .acc-body p{margin:14px 0 0;color:var(--muted)}
+  .acc-body p strong{color:var(--text)}
+  .acc-body h5{margin:20px 0 8px;font-size:12.5px;color:var(--amber);letter-spacing:.06em;font-weight:600;font-family:'IBM Plex Mono',monospace}
+  .acc-body ul{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+  .acc-body li{margin:4px 0}
+  .acc-body li strong,.acc-body td strong{color:var(--text)}
+
+  .learned{
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--green);
+    border-radius:10px;padding:18px 22px;margin-top:16px;
+  }
+  .learned h4{margin:0 0 8px;font-size:12.5px;color:var(--green);letter-spacing:.06em;font-weight:600}
+  .learned ul{margin:0;padding-left:20px}
+  .learned li{margin:6px 0;font-size:14.5px}
+
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:none;
+    color:var(--amber);border:1px solid var(--amber-dim);border-radius:20px;padding:6px 14px;
+    transition:all .15s ease;
+  }
+  .pill:hover{background:var(--amber);color:var(--ink)}
+
+  /* tablas */
+  .tbl-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:8px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--panel-2);font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber);font-weight:600;letter-spacing:.04em}
+  tr:last-child td{border-bottom:none}
+  td{color:var(--muted)}
+  td:first-child{color:var(--text)}
+
+  /* chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+    background:var(--panel-2);color:var(--muted);
+    border:1px solid var(--line);border-radius:20px;padding:5px 13px;cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip:hover{color:var(--text);border-color:var(--amber-dim)}
+  .chip[aria-pressed="true"]{background:var(--amber);color:var(--ink);border-color:var(--amber);font-weight:600}
+  .chip.weak{border-style:dashed}
+
+  .detail{
+    margin-top:14px;background:var(--panel-2);border:1px solid var(--line);
+    border-radius:10px;padding:16px 18px;
+  }
+  .detail h6{margin:0 0 4px;font-size:15px;font-family:'IBM Plex Mono',monospace;color:var(--amber)}
+  .detail .sub{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+  .badge{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    padding:2px 9px;border-radius:20px;margin-right:6px;
+    border:1px solid var(--line);color:var(--muted);
+  }
+  .badge.ok{color:var(--green);border-color:var(--green)}
+  .badge.amber{color:var(--amber);border-color:var(--amber-dim)}
+  .attr-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .attr{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--ink);
+    border:1px solid var(--line);border-radius:6px;padding:3px 9px;color:var(--text);
+  }
+  .attr.key{border-color:var(--amber);color:var(--amber)}
+
+  .search{
+    width:100%;margin-top:14px;
+    background:var(--ink);color:var(--text);
+    border:1px solid var(--line);border-radius:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;padding:10px 14px;
+  }
+  .search:focus{outline:2px solid var(--amber);outline-offset:1px}
+  .count{color:var(--muted);font-size:12px;margin-top:8px;font-family:'IBM Plex Mono',monospace}
+
+  /* código */
+  .code-box{
+    margin-top:12px;background:var(--ink);border:1px solid var(--line);border-radius:8px;overflow:hidden;
+  }
+  .code-bar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:6px 12px;background:var(--panel-2);border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);
+  }
+  .code-bar .btn{padding:3px 10px;font-size:11px}
+  pre{margin:0;padding:14px 16px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.55;color:var(--text)}
+
+  /* barras */
+  .bars{margin-top:12px}
+  .bar-row{display:grid;grid-template-columns:200px 1fr 70px;gap:12px;align-items:center;padding:6px 0;font-size:13px}
+  .bar-row .lbl{color:var(--text)}
+  .bar-row .num{color:var(--muted);text-align:right;font-family:'IBM Plex Mono',monospace;font-size:12px}
+  .bar-track{background:var(--ink);border:1px solid var(--line);border-radius:6px;height:12px;overflow:hidden}
+  .bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--amber-dim),var(--amber));transition:width .8s ease}
+  .bar-row.clickable{cursor:pointer;border-radius:6px}
+  .bar-row.clickable:hover .lbl{color:var(--amber)}
+  .bar-row.clickable.on{background:var(--panel-2)}
+
+  /* timeline */
+  .timeline{list-style:none;margin:14px 0 0;padding:0;border-left:2px solid var(--line);margin-left:6px}
+  .timeline li{position:relative;padding:0 0 18px 24px;color:var(--muted);font-size:14px}
+  .timeline li:last-child{padding-bottom:0}
+  .timeline li::before{
+    content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;
+    background:var(--green);border:2px solid var(--ink);
+  }
+  .timeline li b{color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;margin-right:8px}
+
+  /* stepper */
+  .progress{height:8px;background:var(--ink);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:12px}
+  .progress i{display:block;height:100%;width:0;background:var(--green);transition:width .3s ease}
+  .steps{list-style:none;margin:12px 0 0;padding:0}
+  .step{
+    display:flex;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+    margin-bottom:6px;cursor:pointer;background:var(--panel-2);transition:border-color .15s ease;
+  }
+  .step:hover{border-color:var(--amber-dim)}
+  .step .box{
+    flex-shrink:0;width:20px;height:20px;border:2px solid var(--amber-dim);border-radius:5px;
+    display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink);margin-top:2px;
+  }
+  .step.done .box{background:var(--green);border-color:var(--green)}
+  .step.done .st{text-decoration:line-through;color:var(--muted)}
+  .step .st{font-weight:500;font-size:14px}
+  .step code{
+    display:block;margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:12px;
+    color:var(--amber);word-break:break-all;white-space:pre-wrap;
+  }
+  .step .txt{flex:1;min-width:0}
+
+  .note{color:var(--muted);font-size:12.5px;margin-top:10px}
+
+  @media (max-width:760px){
+    .stats{grid-template-columns:repeat(3,1fr)}
+    .tabs{grid-template-columns:repeat(2,1fr)}
+    .bar-row{grid-template-columns:1fr 70px}
+    .bar-row .bar-track{grid-column:1 / -1;order:3}
+  }
   @media (max-width:640px){
     .hero-grid{grid-template-columns:1fr;}
     .avatar-wrap{justify-self:start}
     header{min-height:auto;padding:48px 20px 40px}
+    .acc>summary .tag{display:none}
   }
 
-  a:focus-visible, button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){
     .caret{animation:none}
     html{scroll-behavior:auto}
+    .bar-fill,.progress i{transition:none}
   }
 </style>
 </head>
@@ -383,26 +633,640 @@ Actualmente estoy construyendo mi camino profesional y buscando cada vez más op
     </div>
   </section>
 
+  <!-- =========================================================
+       TRABAJOS
+       ========================================================= -->
   <section id="trabajos">
     <div class="sec-head">
       <span class="sec-num mono">05</span>
       <h2>Trabajos</h2>
     </div>
-    <p class="lead">Próximamente subiré aquí proyectos y trabajos académicos.</p>
+
+    <div class="proj-intro">
+      <h3>Sistema de gestión de la Liga BetPlay</h3>
+      <p class="meta mono">Bases de Datos 1 · Universidad El Bosque · Equipo Brazuquitas — Felipe Sierra, Samuel Cubillos y Antoine Blanco</p>
+      <p>La información de la liga (equipos, jugadores, partidos, resultados y tarjetas) está dispersa entre medios, aplicaciones y portales, y cada fuente la registra distinto. Diseñamos e implementamos una base de datos relacional que la centraliza para una sola organización, desde el modelo conceptual hasta una aplicación web conectada a Oracle sobre Linux. Explora cada etapa en las pestañas y usa el interruptor para alternar entre <strong>mi proyecto</strong> y la <strong>explicación general con otros ejemplos</strong>.</p>
+    </div>
+
+    <div class="stats" id="stats">
+      <div class="stat"><b data-to="14">0</b><span>entidades en el MER</span></div>
+      <div class="stat"><b data-to="22">0</b><span>tablas en 3FN</span></div>
+      <div class="stat"><b data-to="50">0</b><span>consultas resueltas</span></div>
+      <div class="stat"><b data-to="31">0</b><span>paquetes en la EDT</span></div>
+      <div class="stat"><b data-to="3">0</b><span>integrantes</span></div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Etapas del proyecto">
+      <button class="tab-btn" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true"><small>01</small>Modelamiento</button>
+      <button class="tab-btn" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1"><small>02</small>Normalización</button>
+      <button class="tab-btn" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1"><small>03</small>SQL</button>
+      <button class="tab-btn" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1"><small>04</small>Proyecto final</button>
+    </div>
+
+    <div class="panel-tools">
+      <div class="seg" role="group" aria-label="Vista del contenido">
+        <button type="button" id="view-p" aria-pressed="true">Mi proyecto (Liga BetPlay)</button>
+        <button type="button" id="view-g" aria-pressed="false">En general · otros ejemplos</button>
+      </div>
+      <button class="btn" id="toggle-all" type="button">Expandir todo</button>
+    </div>
+
+    <!-- ================= PANEL 0: MODELAMIENTO ================= -->
+    <div class="tab-panel" role="tabpanel" id="panel-0" aria-labelledby="tab-0">
+
+      <div class="why">
+        <h4 class="mono">¿PARA QUÉ SIRVE EL MODELAMIENTO?</h4>
+        <p>Modelar es dibujar el problema antes de construirlo. Un modelo entidad-relación traduce una situación real en entidades, atributos y relaciones, de modo que todo el equipo (y el cliente) interprete la información igual y los errores de diseño se detecten cuando aún son baratos de corregir.</p>
+      </div>
+
+      <div class="view-p">
+
+      <details class="acc">
+        <summary>Propuesta y problemática <span class="tag mono">Fase 1</span></summary>
+        <div class="acc-body">
+          <p><strong>Problema.</strong> Los datos de la Liga BetPlay no los administra una sola organización: están en medios, apps de terceros, portales de estadísticas y redes sociales. Un mismo dato (las tarjetas de un jugador, el historial entre dos equipos) cambia según la fuente, y consolidar resultados suele ser manual, con riesgo de inconsistencias.</p>
+          <p><strong>Propuesta.</strong> Una base de datos relacional que permita a una única organización centralizar y administrar internamente equipos, jugadores, partidos, resultados y sanciones, con una aplicación web de uso interno y dos roles: USUARIO (consulta) y ADMIN (registra, modifica y elimina).</p>
+          <h5>OBJETIVOS ESPECÍFICOS</h5>
+          <ul>
+            <li>Modelar con diagrama entidad-relación en notación Peter Chen.</li>
+            <li>Normalizar hasta la Tercera Forma Normal (3FN).</li>
+            <li>Implementar en un gestor distinto a SQL Server, sobre una VM con Linux.</li>
+            <li>Formular consultas con álgebra relacional.</li>
+            <li>Desarrollar una aplicación web sencilla conectada a la base.</li>
+            <li>Gestionar el proyecto en GitHub con aportes de todos los integrantes.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>MER en notación Peter Chen <span class="tag mono">14 entidades · 17 relaciones</span></summary>
+        <div class="acc-body">
+          <p>Lo modelamos en draw.io. <strong>TORNEO</strong> es la entidad central. Toca una entidad para ver sus atributos y cómo se relaciona. Las de borde punteado son entidades débiles.</p>
+          <div class="chips" id="ent-chips" role="group" aria-label="Entidades del modelo"></div>
+          <div class="detail" id="ent-detail" aria-live="polite"></div>
+          <h5>DECISIONES DE DISEÑO</h5>
+          <ul>
+            <li><strong>Inscribir</strong> es una relación ternaria (Equipo – Torneo – Jugador): el dorsal y las fechas dependen de la combinación completa, y así se conserva el historial de quien cambia de equipo.</li>
+            <li><strong>PARTICIPACION</strong> nace de convertir en entidad la relación M:N entre jugador y partido, para poder colgarle goles y tarjetas.</li>
+            <li>GOL y TARJETA son entidades débiles: solo existen si el jugador participó en el partido.</li>
+            <li>La <strong>tabla de posiciones no se modela</strong>: se calcula a partir de los resultados.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>MER extendido: especialización y agregación <span class="tag mono">Elmasri y Navathe</span></summary>
+        <div class="acc-body">
+          <p>Al MER en notación Chen le agregamos dos conceptos del modelo extendido. El resto de entidades, atributos y relaciones se conserva.</p>
+          <h5>ESPECIALIZACIÓN DE JUGADOR (RELACIÓN ES)</h5>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Subclase</th><th>Atributo propio</th><th>Qué mide</th></tr></thead>
+            <tbody>
+              <tr><td>ATACANTE</td><td class="mono">Tiros_Puerta</td><td>Tiros a puerta realizados</td></tr>
+              <tr><td>MEDIOCAMPISTA</td><td class="mono">Pases</td><td>Pases realizados</td></tr>
+              <tr><td>DEFENSA</td><td class="mono">Entradas_Oportunas</td><td>Intercepciones o recuperaciones</td></tr>
+              <tr><td>PORTERO</td><td class="mono">Porteria_Imbatida</td><td>Partidos con la portería en cero</td></tr>
+            </tbody>
+          </table></div>
+          <p>Es <strong>disjunta</strong> (un jugador pertenece a una sola subclase) y <strong>total</strong> (todo jugador pertenece a alguna).</p>
+          <p><strong>Agregación PARTICIPACIÓN.</strong> La relación Jugar (jugador–partido, M:N) se trata como una unidad sobre la que se registran goles y tarjetas. Como una relación no puede participar en otra relación, en el MER normal se reemplaza por la entidad PARTICIPACION.</p>
+          <div class="links"><a class="pill" href="https://samuel082122008.github.io/docs/MER_Extendido_BD1.pdf" target="_blank" rel="noopener">↗ Diagrama MER extendido (PDF)</a></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Documento de supuestos y reglas de negocio <span class="tag mono">14 reglas</span></summary>
+        <div class="acc-body">
+          <p>Antes de dibujar escribimos los supuestos y las reglas que adoptamos, para que el diagrama se lea sin ambigüedad. Algunas las garantiza la base de datos (llaves, UNIQUE, NOT NULL) y otras las valida la aplicación (rangos y comparaciones).</p>
+          <h5>SUPUESTOS GENERALES</h5>
+          <ul>
+            <li>La información la administra una única organización y el sistema corre de forma local.</li>
+            <li>Solo el rol ADMIN registra, actualiza y elimina datos.</li>
+            <li>Jugadores, técnicos y árbitros son categorías disjuntas.</li>
+            <li>La edad y la duración del torneo se calculan, no se guardan.</li>
+          </ul>
+          <h5>BUSCAR UNA REGLA DE NEGOCIO</h5>
+          <input class="search" id="rule-search" type="search" placeholder="Filtra por palabra: partido, dorsal, puntos…" aria-label="Filtrar reglas de negocio">
+          <div class="count" id="rule-count"></div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th style="width:80px">Código</th><th>Regla</th></tr></thead>
+            <tbody id="rule-body"></tbody>
+          </table></div>
+          <div class="links"><a class="pill" href="https://samuel082122008.github.io/docs/Documento_de_Supuestos_BD1.pdf" target="_blank" rel="noopener">↗ Documento de supuestos (PDF)</a></div>
+        </div>
+      </details>
+
+      <div class="learned">
+        <h4 class="mono">¿QUÉ APRENDÍ?</h4>
+        <ul>
+          <li>A distinguir entidades fuertes y débiles y a representar la dependencia de existencia con rombos dobles.</li>
+          <li>A usar una relación ternaria cuando los atributos dependen de la combinación de tres entidades.</li>
+          <li>A convertir una relación M:N en entidad para poder asociarle más información, y a no modelar lo que se puede calcular.</li>
+          <li>Cuándo especializar (cuando solo una parte de las entidades tiene ciertos atributos) y la diferencia entre especialización disjunta y total.</li>
+          <li>Que escribir los supuestos obliga a decidir antes de dibujar y evita discusiones después.</li>
+        </ul>
+      </div>
+    </div>
+
+<div class="view-g">
+  <details class="acc" open>
+    <summary>Método de 5 pasos para modelar cualquier problema <span class="tag mono">reutilizable</span></summary>
+    <div class="acc-body">
+      <p>No importa si es una liga, una biblioteca o un hospital: el procedimiento es el mismo.</p>
+      <ol>
+        <li><strong>Lee el enunciado y subraya.</strong> Los sustantivos suelen ser entidades; los verbos, relaciones.</li>
+        <li><strong>Elige un identificador</strong> para cada entidad: ¿qué dato nunca se repite?</li>
+        <li><strong>Lista los atributos</strong> y clasifícalos: simples, compuestos, multivaluados o derivados.</li>
+        <li><strong>Define las cardinalidades</strong> preguntando en los dos sentidos: “¿cuántos A tiene un B?” y “¿cuántos B tiene un A?”.</li>
+        <li><strong>Revisa:</strong> una M:N con datos propios pide una entidad o un rombo con atributos; lo que no existe sin otra cosa es entidad débil; un subgrupo con atributos propios es una especialización.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="acc" open>
+    <summary>El mismo método en otros dominios <span class="tag mono">4 ejemplos</span></summary>
+    <div class="acc-body">
+      <p>Elige un dominio para ver cómo se modela y qué decisión de diseño lo hace interesante.</p>
+      <div class="chips" id="dom-chips" role="group" aria-label="Dominios de ejemplo"></div>
+      <div class="detail" id="dom-detail" aria-live="polite"></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Notaciones: Chen, Crow’s Foot y UML <span class="tag mono">comparación</span></summary>
+    <div class="acc-body">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Notación</th><th>Cómo se dibuja</th><th>Cuándo conviene</th></tr></thead>
+        <tbody>
+          <tr><td>Peter Chen</td><td>Entidades en rectángulos, atributos en óvalos, relaciones en rombos.</td><td>Para pensar y explicar el modelo conceptual: muestra atributos de relaciones y ternarias con claridad.</td></tr>
+          <tr><td>Crow’s Foot (pata de gallo)</td><td>Tablas con la cardinalidad dibujada en los extremos de las líneas.</td><td>Cuando ya estás cerca del modelo físico: se parece a las tablas que vas a crear.</td></tr>
+          <tr><td>Diagrama de clases UML</td><td>Clases con atributos y asociaciones con multiplicidad (1, 0..*, 1..*).</td><td>Cuando el modelo debe conversar con el código orientado a objetos (por ejemplo, entidades en Spring Boot).</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Errores comunes al modelar <span class="tag mono">evítalos</span></summary>
+    <div class="acc-body">
+      <ul>
+        <li><strong>Guardar lo que se puede calcular:</strong> edad, totales o tablas de posiciones se derivan de otros datos.</li>
+        <li><strong>Olvidar los atributos de la relación:</strong> la cantidad de una compra o la nota de una matrícula no pertenecen a ninguna de las dos entidades, sino a la relación.</li>
+        <li><strong>Dejar una M:N sin resolver:</strong> en tablas siempre necesita una tabla intermedia.</li>
+        <li><strong>Confundir la cosa con su copia:</strong> un libro (la obra) no es un ejemplar (la copia física que se presta).</li>
+        <li><strong>Repetir texto en lugar de crear una entidad:</strong> si “Bogotá” se escribe a mano en cien filas, aparecerán “bogota” y “Bogotá D.C.”.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="learned">
+    <h4 class="mono">PARA LLEVARTE</h4>
+    <ul>
+      <li>Modelar sirve en cualquier sistema que guarde información: tiendas, colegios, clínicas, apps de reservas.</li>
+      <li>Un buen modelo se prueba haciéndole preguntas: si puedes responderlas con el diagrama, está completo.</li>
+      <li>Dibujar primero es más barato que corregir una base de datos que ya tiene datos.</li>
+    </ul>
+  </div>
+</div>
+    </div>
+
+    <!-- ================= PANEL 1: NORMALIZACIÓN ================= -->
+    <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" hidden>
+
+      <div class="why">
+        <h4 class="mono">¿PARA QUÉ SIRVE LA NORMALIZACIÓN?</h4>
+        <p>Normalizar es organizar los datos en tablas para que cada hecho se guarde una sola vez. Con ello se evita la redundancia y las anomalías de inserción, actualización y eliminación, y la base se mantiene consistente aunque crezca. Aquí pasamos el MER a un modelo relacional de 22 tablas en 3FN.</p>
+      </div>
+
+      <div class="view-p">
+
+      <details class="acc" open>
+        <summary>Reducción del MER a tablas <span class="tag mono">22 tablas · 3FN</span></summary>
+        <div class="acc-body">
+          <p>Aplicamos las reglas de paso de E-R a tablas (Silberschatz et al., 2020). Esta es la regla que se usó para cada elemento del modelo:</p>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Elemento del MER</th><th>Cómo quedó en tablas</th></tr></thead>
+            <tbody>
+              <tr><td>Atributo compuesto</td><td>Se descompone en columnas simples (nombre → nombres y apellidos).</td></tr>
+              <tr><td>Atributo multivaluado</td><td>Tabla propia: los colores del equipo pasan a EQUIPO_COLOR.</td></tr>
+              <tr><td>Atributo derivado</td><td>No se almacena (edad, duración en días).</td></tr>
+              <tr><td>Relación 1:N</td><td>Llave foránea en el lado N. La 1:1 Dirigir usa id_tecnico UNIQUE en EQUIPO.</td></tr>
+              <tr><td>Relación M:N y ternaria</td><td>Tablas intermedias: EQUIPO_TORNEO, ARBITRAJE e INSCRIPCION.</td></tr>
+              <tr><td>Entidad débil</td><td>Hereda la llave del dueño con ON DELETE CASCADE.</td></tr>
+              <tr><td>Especialización</td><td>Una tabla por subclase; su llave primaria es también foránea hacia JUGADOR.</td></tr>
+            </tbody>
+          </table></div>
+          <p><strong>Un ejemplo de 3FN.</strong> GOL y TARJETA no guardan id_jugador, porque ya se obtiene por la participación; guardarlo crearía una dependencia transitiva.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Explorador de las 22 tablas <span class="tag mono">buscable</span></summary>
+        <div class="acc-body">
+          <input class="search" id="tbl-search" type="search" placeholder="Busca una tabla o una llave: partido, id_jugador, cedula…" aria-label="Buscar tablas">
+          <div class="count" id="tbl-count"></div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Tabla</th><th>Llave primaria</th><th>Llaves foráneas</th></tr></thead>
+            <tbody id="tbl-body"></tbody>
+          </table></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Decisiones sobre el borrado y las validaciones <span class="tag mono">integridad</span></summary>
+        <div class="acc-body">
+          <ul>
+            <li><strong>ON DELETE CASCADE</strong> en las entidades débiles: si se borra un partido se borra su resultado, y si se borra una participación se borran sus goles y tarjetas.</li>
+            <li>En los demás casos conviene <strong>bloquear</strong> el borrado para no perder historial.</li>
+            <li>Los rangos y valores permitidos los valida el backend; en la base quedan llaves, UNIQUE y NOT NULL.</li>
+            <li>La tabla de posiciones no es una tabla: se calcula con una consulta cada vez.</li>
+          </ul>
+        </div>
+      </details>
+
+      <div class="learned">
+        <h4 class="mono">¿QUÉ APRENDÍ?</h4>
+        <ul>
+          <li>A aplicar 1FN, 2FN y 3FN sobre un modelo real y a detectar dependencias transitivas.</li>
+          <li>Que normalizar a veces significa <strong>no</strong> agregar una columna que parece útil.</li>
+          <li>Cuándo usar ON DELETE CASCADE y cuándo conviene bloquear el borrado.</li>
+        </ul>
+      </div>
+    </div>
+
+<div class="view-g">
+  <details class="acc" open>
+    <summary>Las formas normales en una línea <span class="tag mono">1FN · 2FN · 3FN · BCNF</span></summary>
+    <div class="acc-body">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Forma</th><th>Regla</th><th>Pregunta para detectarla</th></tr></thead>
+        <tbody>
+          <tr><td>1FN</td><td>Cada celda guarda un solo valor, sin listas ni grupos repetidos.</td><td>¿Hay celdas como “Mouse, Teclado”?</td></tr>
+          <tr><td>2FN</td><td>Está en 1FN y ningún atributo depende de solo una parte de la llave compuesta.</td><td>¿Algún dato depende solo de una parte de la llave?</td></tr>
+          <tr><td>3FN</td><td>Está en 2FN y ningún atributo depende de otro que no es llave.</td><td>¿Un dato se deduce de otro que no es la llave?</td></tr>
+          <tr><td>BCNF</td><td>Todo determinante es llave candidata. Es una 3FN más estricta.</td><td>¿Hay algún determinante que no sea llave?</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </details>
+
+  <details class="acc" open>
+    <summary>Normaliza una tabla paso a paso <span class="tag mono">pedidos de una tienda</span></summary>
+    <div class="acc-body">
+      <p>Una tienda guarda todo en una sola tabla. Avanza por las etapas y mira qué problema se arregla en cada una.</p>
+      <div class="chips" id="nf-chips" role="group" aria-label="Etapas de normalización"></div>
+      <div class="detail" id="nf-detail" aria-live="polite"></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Las tres anomalías, con el ejemplo de la tienda <span class="tag mono">por qué importa</span></summary>
+    <div class="acc-body">
+      <ul>
+        <li><strong>Inserción:</strong> en la tabla original no puedes registrar un cliente nuevo hasta que haga un pedido.</li>
+        <li><strong>Actualización:</strong> si el precio del Mouse cambia, hay que modificarlo en todas las filas donde aparece; si se olvida una, la base se contradice.</li>
+        <li><strong>Eliminación:</strong> si se borra el único pedido de Luis, también se pierde que Luis vive en Cali.</li>
+      </ul>
+      <p>Normalizar hace que cada hecho viva en un solo lugar, y estas tres situaciones dejan de ser un riesgo.</p>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Cuándo conviene desnormalizar <span class="tag mono">trade-off</span></summary>
+    <div class="acc-body">
+      <p>Normalizar optimiza la consistencia, pero reparte los datos en más tablas y exige más JOIN. A veces se rompe la regla a propósito:</p>
+      <ul>
+        <li><strong>Reportes y bodegas de datos:</strong> se leen mucho y casi no se modifican, así que se guardan tablas ya combinadas para que respondan rápido.</li>
+        <li><strong>Datos históricos:</strong> el precio de venta se copia en cada línea del pedido para que una factura vieja no cambie si el precio sube.</li>
+        <li><strong>Rendimiento medido:</strong> se desnormaliza solo cuando se comprueba que un JOIN es el cuello de botella, no por intuición.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="learned">
+    <h4 class="mono">PARA LLEVARTE</h4>
+    <ul>
+      <li>Normalizar es preguntarse, columna por columna, “¿de qué depende realmente este dato?”.</li>
+      <li>Se aplica igual a una tienda, una escuela o un hospital: siempre buscas listas en celdas, dependencias parciales y dependencias transitivas.</li>
+      <li>Lo normal es empezar normalizado y desnormalizar con una razón medida, no al revés.</li>
+    </ul>
+  </div>
+</div>
+    </div>
+
+    <!-- ================= PANEL 2: SQL ================= -->
+    <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+
+      <div class="why">
+        <h4 class="mono">¿PARA QUÉ SIRVEN EL ÁLGEBRA RELACIONAL Y SQL?</h4>
+        <p>El álgebra relacional es la base teórica de las consultas: define operaciones (selección, proyección, uniones, joins, división…) que combinan tablas. SQL es el lenguaje que las implementa. Entender el álgebra permite razonar una consulta antes de escribirla y traducirla a SQL con criterio, en lugar de adivinar.</p>
+      </div>
+
+      <div class="view-p">
+
+      <details class="acc" open>
+        <summary>50 ejercicios sobre el esquema LIGA <span class="tag mono">álgebra + SQL de Oracle</span></summary>
+        <div class="acc-body">
+          <p>Cada ejercicio tiene enunciado, razonamiento, expresión en álgebra, equivalente en SQL de Oracle y el resultado con los datos reales del proyecto. Así se reparten (toca una fila para ver su equivalente en SQL):</p>
+          <div class="bars" id="ops-bars"></div>
+          <div class="detail" id="ops-detail" aria-live="polite"></div>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>Tres ejemplos para comparar <span class="tag mono">álgebra ⇄ SQL</span></summary>
+        <div class="acc-body">
+          <div class="chips" id="ex-chips" role="group" aria-label="Ejemplos de consultas"></div>
+          <p id="ex-desc"></p>
+          <div class="code-box">
+            <div class="code-bar"><span>Álgebra relacional</span><button class="btn" type="button" data-copy="ex-alg">Copiar</button></div>
+            <pre id="ex-alg"></pre>
+          </div>
+          <div class="code-box">
+            <div class="code-bar"><span>SQL (Oracle)</span><button class="btn" type="button" data-copy="ex-sql">Copiar</button></div>
+            <pre id="ex-sql"></pre>
+          </div>
+          <div class="links"><a class="pill" href="https://samuel082122008.github.io/docs/Algebra_Relacional_BD1.pdf" target="_blank" rel="noopener">↗ Los 50 ejercicios completos (PDF)</a></div>
+        </div>
+      </details>
+
+      <div class="learned">
+        <h4 class="mono">¿QUÉ APRENDÍ?</h4>
+        <ul>
+          <li>A leer las expresiones de adentro hacia afuera y a guardar resultados intermedios con asignación.</li>
+          <li>Que las preguntas con “nunca” o “sin” se resuelven con el patrón de la diferencia: universo menos los que sí cumplen.</li>
+          <li>Que la división responde preguntas de “todos los…” y en SQL se traduce a GROUP BY con HAVING.</li>
+        </ul>
+      </div>
+    </div>
+
+<div class="view-g">
+  <details class="acc" open>
+    <summary>SQL en cuatro familias <span class="tag mono">qué hace cada grupo</span></summary>
+    <div class="acc-body">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Familia</th><th>Comandos</th><th>Para qué sirve</th></tr></thead>
+        <tbody>
+          <tr><td>DDL</td><td class="mono">CREATE, ALTER, DROP</td><td>Definir la estructura: tablas, llaves y restricciones.</td></tr>
+          <tr><td>DML</td><td class="mono">INSERT, UPDATE, DELETE</td><td>Modificar los datos que viven en las tablas.</td></tr>
+          <tr><td>DQL</td><td class="mono">SELECT</td><td>Consultar: filtrar, unir, agrupar y ordenar.</td></tr>
+          <tr><td>DCL y TCL</td><td class="mono">GRANT, REVOKE, COMMIT, ROLLBACK</td><td>Controlar permisos y confirmar o deshacer grupos de cambios.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </details>
+
+  <details class="acc" open>
+    <summary>Practica con una tienda en línea <span class="tag mono">6 consultas</span></summary>
+    <div class="acc-body">
+      <p>Esquema de ejemplo: <span class="mono">CLIENTE(id_cliente, nombre, ciudad)</span>, <span class="mono">PRODUCTO(id_producto, nombre, precio)</span>, <span class="mono">PEDIDO(id_pedido, id_cliente, fecha)</span> y <span class="mono">LINEA(id_pedido, id_producto, cantidad)</span>. Elige una pregunta de negocio:</p>
+      <div class="chips" id="gs-chips" role="group" aria-label="Consultas de ejemplo"></div>
+      <div class="detail" id="gs-detail" aria-live="polite"></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Dónde se usa SQL en la vida real <span class="tag mono">aplicaciones</span></summary>
+    <div class="acc-body">
+      <ul>
+        <li><strong>Aplicaciones web y móviles:</strong> el backend traduce cada botón (“ver mis pedidos”) en una consulta a la base.</li>
+        <li><strong>Análisis de datos y reportes:</strong> un analista saca ventas por mes o clientes más activos sin programar.</li>
+        <li><strong>Inteligencia de negocio:</strong> tableros que se alimentan de consultas.</li>
+        <li><strong>Auditoría y soporte:</strong> verificar qué pasó con un pedido o un usuario.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Buenas prácticas <span class="tag mono">escribe mejor SQL</span></summary>
+    <div class="acc-body">
+      <ul>
+        <li>Pide solo las columnas que necesitas en lugar de <span class="mono">SELECT *</span>.</li>
+        <li>Usa alias claros (<span class="mono">c</span> para cliente) y escribe cada JOIN con su condición.</li>
+        <li><strong>Nunca armes consultas pegando texto del usuario:</strong> usa parámetros para evitar la inyección SQL.</li>
+        <li>Agrupa cambios relacionados en una transacción: o se aplican todos o ninguno.</li>
+        <li>Crea índices en las columnas por las que más buscas, y mide antes de optimizar.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="learned">
+    <h4 class="mono">PARA LLEVARTE</h4>
+    <ul>
+      <li>Antes de escribir SQL, razona la consulta en álgebra: qué tablas, qué condición, qué columnas.</li>
+      <li>Casi toda pregunta de negocio cae en un patrón: filtrar, unir, agrupar, “sin…” (diferencia) o “todos los…” (división).</li>
+      <li>SQL no es solo para consultar: también define la estructura y protege los datos.</li>
+    </ul>
+  </div>
+</div>
+    </div>
+
+    <!-- ================= PANEL 3: PROYECTO FINAL ================= -->
+    <div class="tab-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
+
+      <div class="why">
+        <h4 class="mono">¿PARA QUÉ SIRVE EL PROYECTO FINAL?</h4>
+        <p>Es donde todo se junta: el modelo deja de ser un dibujo y se vuelve un sistema que funciona. Hay que elegir sistema operativo y gestor de base de datos, instalarlos en una máquina virtual, conectar una aplicación web y, a la vez, gestionar el proyecto con alcance, cronograma y presupuesto.</p>
+      </div>
+
+      <div class="view-p">
+
+      <details class="acc" open>
+        <summary>Línea de tiempo <span class="tag mono">22/09 → 13/11/2026</span></summary>
+        <div class="acc-body">
+          <ol class="timeline">
+            <li><b>22/09</b>Inicio del proyecto y entrega de la propuesta.</li>
+            <li><b>28–29/10</b>Instalación de Oracle AI Database 26ai Free en la VM.</li>
+            <li><b>04/11</b>Aplicación web terminada (versión base).</li>
+            <li><b>06/11</b>Video de demostración.</li>
+            <li><b>13/11</b>Sustentación del proyecto y acta de cierre.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Elección del sistema operativo y la virtualización <span class="tag mono">Fase 2</span></summary>
+        <div class="acc-body">
+          <p>Restricciones: solo Linux o Unix, base distinta de SQL Server (Oracle, para seguir con SQL Developer), equipos de 16 GB de RAM y sin presupuesto para licencias. Elige una alternativa para ver cómo respondió a cada criterio:</p>
+          <div class="chips" id="so-chips" role="group" aria-label="Sistemas operativos evaluados"></div>
+          <div class="detail" id="so-detail" aria-live="polite"></div>
+          <p><strong>Decisión:</strong> Oracle Linux 9 (Server, sin interfaz gráfica, versión 9.8): es el sistema oficial de Oracle AI Database Free, gratuito y con guía oficial. Se eligió la 9 y no la 10 porque está más probada y la 10 exige procesadores más modernos.</p>
+          <p><strong>Virtualización:</strong> Oracle VirtualBox 7.2, gratuito y capaz de exportar la VM completa en un archivo OVA para abrirla en otro computador.</p>
+          <h5>CONFIGURACIÓN BASE DE LA VM</h5>
+          <div class="tbl-wrap"><table>
+            <tbody>
+              <tr><td>Nombre</td><td class="mono">BD1-OracleLinux</td></tr>
+              <tr><td>Memoria</td><td>4096 MB (Oracle Free usa hasta 2 GB)</td></tr>
+              <tr><td>Procesadores</td><td>2 (el máximo que usa Oracle Free)</td></tr>
+              <tr><td>Disco</td><td>40 GB, VDI dinámico</td></tr>
+              <tr><td>Red</td><td>NAT con reenvío de puertos: 1521 (Oracle) y 2222 → 22 (SSH)</td></tr>
+            </tbody>
+          </table></div>
+          <div class="links"><a class="pill" href="https://samuel082122008.github.io/docs/Analisis_Seleccion_SO_BD1.pdf" target="_blank" rel="noopener">↗ Análisis de selección del SO (PDF)</a></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Elección del gestor de base de datos <span class="tag mono">Fase 2</span></summary>
+        <div class="acc-body">
+          <p>Comparamos las cuatro opciones que permite el enunciado según tres necesidades: funcionar en Oracle Linux 9, trabajar con SQL Developer y no tener costo.</p>
+          <div class="chips" id="db-chips" role="group" aria-label="Gestores evaluados"></div>
+          <div class="detail" id="db-detail" aria-live="polite"></div>
+          <p><strong>Decisión:</strong> Oracle AI Database 26ai Free. Funciona completo con SQL Developer, tiene soporte oficial en Oracle Linux y sus límites alcanzan de sobra para las 22 tablas de la liga. Los límites quedaron documentados como limitación conocida.</p>
+          <div class="links"><a class="pill" href="https://samuel082122008.github.io/docs/Analisis_Seleccion_RDBMS_BD1.pdf" target="_blank" rel="noopener">↗ Análisis de selección del RDBMS (PDF)</a></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Instalación paso a paso y errores <span class="tag mono">checklist</span></summary>
+        <div class="acc-body">
+          <p>Marca cada paso para seguir el avance. Entorno: VirtualBox 7.2.8, Oracle Linux Server 9.8 y Oracle AI Database 26ai Free 23.26.3 (contenedora <span class="mono">FREE</span>, conectable <span class="mono">FREEPDB1</span>, esquema <span class="mono">LIGA</span>).</p>
+          <div class="progress" aria-hidden="true"><i id="steps-bar"></i></div>
+          <div class="count" id="steps-count"></div>
+          <ul class="steps" id="steps"></ul>
+          <h5>PROBLEMAS Y SOLUCIONES</h5>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Problema</th><th>Causa</th><th>Solución</th></tr></thead>
+            <tbody>
+              <tr><td>scp dice que el archivo no existe</td><td>Se copió el nombre con una “X” de ejemplo</td><td>Escribir el nombre real: 23.26.3-1</td></tr>
+              <tr><td>“-P no se reconoce como comando”</td><td>Faltó escribir scp al inicio</td><td>Repetir el comando completo</td></tr>
+              <tr><td>Connection refused en el puerto 2222</td><td>SSH no estaba activo en la VM</td><td class="mono">sudo systemctl enable --now sshd</td></tr>
+              <tr><td>ORA-01034 al abrir FREEPDB1</td><td>La instancia no estaba iniciada</td><td class="mono">STARTUP; como sysdba</td></tr>
+              <tr><td>SQL Developer no llegaba a la base</td><td>Puerto 1521 cerrado en el firewall</td><td class="mono">firewall-cmd --add-port=1521/tcp</td></tr>
+            </tbody>
+          </table></div>
+          <p><strong>Estado final.</strong> La base quedó en FREEPDB1, esquema LIGA, con 22 tablas. La aplicación web se conecta por JDBC con el usuario LIGA y ya lee y modifica los datos.</p>
+          <div class="links"><a class="pill" href="https://samuel082122008.github.io/docs/Implementacion_RDBMS_BD1.pdf" target="_blank" rel="noopener">↗ Implementación con capturas (PDF)</a></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Gestión del proyecto <span class="tag mono">Acta · EDT · Cronograma · Presupuesto</span></summary>
+        <div class="acc-body">
+          <p>Gestionamos el proyecto con documentos de dirección de proyectos. Yo asumí el rol de <strong>gerente de proyecto</strong> (autoridad sobre el presupuesto y la mediación de conflictos); las decisiones técnicas las lidera Antoine con apoyo del equipo, y Samuel y yo desarrollamos junto a él.</p>
+          <h5>EDT: 6 COMPONENTES, 31 PAQUETES DE TRABAJO</h5>
+          <div class="chips" id="edt-chips" role="group" aria-label="Componentes de la EDT"></div>
+          <div class="detail" id="edt-detail" aria-live="polite"></div>
+          <h5>OBJETIVOS E INDICADORES DE ÉXITO</h5>
+          <ul>
+            <li>100 % de los requerimientos funcionales implementados.</li>
+            <li>Esquema normalizado: 100 % de las tablas en 3FN.</li>
+            <li>Mínimo 50 ejercicios de álgebra relacional.</li>
+            <li>Aplicación consultando datos reales en un RDBMS que no sea SQL Server, sobre una VM Linux.</li>
+            <li>Commits significativos de los 3 integrantes en GitHub.</li>
+            <li>Usar el 90 % del presupuesto estimado y entregar el 100 % a tiempo.</li>
+          </ul>
+          <h5>PRESUPUESTO EN COP (TOCA UNA FILA)</h5>
+          <div class="bars" id="bud-bars"></div>
+          <div class="detail" id="bud-detail" aria-live="polite"></div>
+          <p class="note">Total $ 8.890.000 · Meta de costo: 90 % del presupuesto ($ 8.001.000).</p>
+          <div class="links">
+            <a class="pill" href="https://samuel082122008.github.io/docs/Acta_de_Constitucion_BD1.pdf" target="_blank" rel="noopener">↗ Acta de constitución</a>
+            <a class="pill" href="https://samuel082122008.github.io/docs/Identificacion_de_Interesados_BD1.pdf" target="_blank" rel="noopener">↗ Interesados</a>
+            <a class="pill" href="https://samuel082122008.github.io/docs/EDT_BD1.pdf" target="_blank" rel="noopener">↗ EDT</a>
+            <a class="pill" href="https://samuel082122008.github.io/docs/Cronograma_BD1.pdf" target="_blank" rel="noopener">↗ Cronograma</a>
+            <a class="pill" href="https://samuel082122008.github.io/docs/Presupuesto_BD1.pdf" target="_blank" rel="noopener">↗ Presupuesto</a>
+          </div>
+        </div>
+      </details>
+
+      <div class="learned">
+        <h4 class="mono">¿QUÉ APRENDÍ?</h4>
+        <ul>
+          <li>Cómo se conectan las piezas: sistema operativo, listener, base contenedora y base conectable; y que instalar el paquete no crea la base, eso lo hace el script de configuración.</li>
+          <li>A elegir tecnología por el contexto del proyecto (herramientas, tipos de datos, entorno) y no solo por popularidad, dejando documentados los límites de una edición gratuita.</li>
+          <li>Qué es un hipervisor y por qué el reenvío de puertos permite conectarse por localhost.</li>
+          <li>Que anotar los errores sirve para repetir la instalación en otro equipo.</li>
+          <li>A descomponer un proyecto en paquetes entregables y a conectar la EDT con el cronograma y el presupuesto.</li>
+        </ul>
+      </div>
+    </div>
+
+<div class="view-g">
+  <details class="acc" open>
+    <summary>De la idea a un sistema en marcha <span class="tag mono">ciclo de vida</span></summary>
+    <div class="acc-body">
+      <p>Cualquier sistema con base de datos recorre las mismas etapas. Toca una para ver qué se hace y un ejemplo de un gimnasio.</p>
+      <div class="chips" id="life-chips" role="group" aria-label="Etapas del ciclo de vida"></div>
+      <div class="detail" id="life-detail" aria-live="polite"></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Arquitectura típica de tres capas <span class="tag mono">cómo se conectan las piezas</span></summary>
+    <div class="acc-body">
+      <div class="code-box"><div class="code-bar"><span>Flujo de una petición</span></div>
+<pre class="diagram">  Navegador (Angular, React…)
+        │   HTTP + JSON
+        ▼
+  API / Backend (Spring Boot, Node, Django…)
+        │   JDBC o driver, consultas con parámetros
+        ▼
+  Base de datos (Oracle, PostgreSQL, MySQL…)</pre></div>
+      <ul>
+        <li>El <strong>frontend</strong> nunca habla directo con la base: pasa por el backend.</li>
+        <li>El <strong>backend</strong> valida reglas (rangos, permisos por rol) y arma las consultas con parámetros.</li>
+        <li>La <strong>base de datos</strong> garantiza lo estructural: llaves, UNIQUE y NOT NULL.</li>
+        <li>Las tecnologías cambian, pero las tres capas son las mismas en una tienda, un banco o una app de reservas.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Elige tecnología con una matriz de criterios <span class="tag mono">interactivo</span></summary>
+    <div class="acc-body">
+      <p>Es el método de comparar alternativas por criterios con peso. Los números de abajo son un <strong>ejemplo ilustrativo</strong> (gestor para una app de reservas de un restaurante pequeño): cámbialos con tus propias necesidades. Puntúa de 1 a 5; el peso indica qué tanto importa el criterio.</p>
+      <div class="tbl-wrap"><table class="score">
+        <thead><tr><th>Criterio</th><th>Peso</th><th>PostgreSQL</th><th>MySQL</th><th>SQLite</th></tr></thead>
+        <tbody id="score-body"></tbody>
+        <tfoot><tr><td colspan="2"><strong>Total ponderado</strong></td><td class="mono" id="sc-0"></td><td class="mono" id="sc-1"></td><td class="mono" id="sc-2"></td></tr></tfoot>
+      </table></div>
+      <div class="count" id="score-win"></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Calculadora de presupuesto de un proyecto <span class="tag mono">interactivo</span></summary>
+    <div class="acc-body">
+      <p>Un presupuesto separa <strong>costos directos</strong> (horas, equipos), <strong>indirectos</strong> (internet, energía, licencias) y una <strong>reserva</strong> para imprevistos. Los porcentajes por defecto se parecen a los de mi proyecto (≈ 19 % y ≈ 12 % sobre los directos).</p>
+      <div class="calc">
+        <label>Costos directos (COP)<input type="number" id="c-dir" value="6800000" min="0" step="10000"></label>
+        <label>Indirectos (% de directos)<input type="number" id="c-ind" value="19" min="0" max="100" step="1"></label>
+        <label>Reserva (% de directos)<input type="number" id="c-res" value="12" min="0" max="100" step="1"></label>
+      </div>
+      <div class="detail" id="calc-out" aria-live="polite"></div>
+    </div>
+  </details>
+
+  <details class="acc">
+    <summary>Hábitos que hacen que un proyecto sea repetible <span class="tag mono">buenas prácticas</span></summary>
+    <div class="acc-body">
+      <ul>
+        <li><strong>Descomponer el trabajo</strong> en paquetes entregables (EDT) y verificar que la suma cubre el 100 % del alcance.</li>
+        <li><strong>Documentar los errores</strong> y su solución: así se repite la instalación en otro equipo sin empezar de cero.</li>
+        <li><strong>Control de versiones en equipo:</strong> commits pequeños, mensajes claros y aportes visibles de todos.</li>
+        <li><strong>Listar los riesgos</strong> desde el inicio (conexión, tiempos, aportes desiguales) y decidir cómo mitigarlos.</li>
+        <li><strong>Dejar un README</strong> que explique cómo levantar el proyecto desde cero.</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="learned">
+    <h4 class="mono">PARA LLEVARTE</h4>
+    <ul>
+      <li>Un proyecto de datos es mitad técnica y mitad organización: sin alcance, cronograma y presupuesto, la mejor base de datos no llega a tiempo.</li>
+      <li>Elegir tecnología es comparar contra necesidades concretas, no seguir la moda.</li>
+      <li>Lo que documentas hoy es lo que te ahorra horas la próxima vez.</li>
+    </ul>
+  </div>
+</div>
+    </div>
 
     <!--
-      CÓMO AGREGAR UN TRABAJO MÁS ADELANTE:
-      Copia el bloque de abajo (desde <div class="commit"> hasta </div> incluido)
-      y pégalo justo antes de </div> del .log. Cambia el título y la descripción.
-
-      <div class="commit">
-        <div><span class="commit-msg">Nombre del trabajo</span></div>
-        <div class="commit-meta mono">Breve descripción — materia o fecha</div>
-      </div>
+      CÓMO AGREGAR OTRO TRABAJO MÁS ADELANTE:
+      Copia el bloque <div class="proj-intro"> con su título y descripción y
+      pégalo debajo del último panel, o agrega un <div class="commit"> dentro de un .log.
     -->
-    <div class="log">
-      <!-- aquí irán tus trabajos, uno por cada <div class="commit"> -->
-    </div>
   </section>
 
   <section id="contacto">
@@ -420,6 +1284,611 @@ Actualmente estoy construyendo mi camino profesional y buscando cada vez más op
 </main>
 
 <footer class="mono">© 2026 Andrés Felipe Sierra Monroy — construido con HTML y CSS</footer>
+
+<script>
+(function(){
+  const $  = (s,r=document)=>r.querySelector(s);
+  const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+  function h(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- pestañas ---------- */
+  const tabs=$$('.tab-btn'), panels=$$('.tab-panel');
+  function activate(i,focus){
+    tabs.forEach((t,j)=>{
+      const on=i===j;
+      t.setAttribute('aria-selected',on);
+      t.tabIndex=on?0:-1;
+      panels[j].hidden=!on;
+    });
+    if(focus) tabs[i].focus();
+    syncToggle();
+  }
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>activate(i));
+    t.addEventListener('keydown',e=>{
+      if(e.key==='ArrowRight'){e.preventDefault();activate((i+1)%tabs.length,true);}
+      if(e.key==='ArrowLeft'){e.preventDefault();activate((i-1+tabs.length)%tabs.length,true);}
+    });
+  });
+
+  /* ---------- expandir / colapsar todo ---------- */
+  const toggleBtn=$('#toggle-all');
+  function activePanel(){return panels.find(p=>!p.hidden);}
+  function visibleDetails(){return $$('details.acc',activePanel()).filter(d=>d.offsetParent!==null);}
+  function syncToggle(){
+    const ds=visibleDetails();
+    toggleBtn.textContent = ds.every(d=>d.open) ? 'Colapsar todo' : 'Expandir todo';
+  }
+  toggleBtn.addEventListener('click',()=>{
+    const ds=visibleDetails();
+    const open=!ds.every(d=>d.open);
+    ds.forEach(d=>d.open=open);
+    syncToggle();
+  });
+  $$('details.acc').forEach(d=>d.addEventListener('toggle',syncToggle));
+
+  /* ---------- contadores ---------- */
+  const statEls=$$('#stats b');
+  function countUp(el){
+    const to=+el.dataset.to;
+    if(reduce){el.textContent=to;return;}
+    const t0=performance.now(), dur=1100;
+    (function tick(t){
+      const p=Math.min((t-t0)/dur,1);
+      el.textContent=Math.round(to*(1-Math.pow(1-p,3)));
+      if(p<1) requestAnimationFrame(tick);
+    })(t0);
+  }
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting){ statEls.forEach(countUp); io.disconnect(); } });
+    },{threshold:.4});
+    io.observe($('#stats'));
+  } else statEls.forEach(countUp);
+
+  /* ---------- helper: chips + panel de detalle ---------- */
+  function chipSelector(chipsEl, items, render, opts={}){
+    items.forEach((it,i)=>{
+      const b=h('button','chip'+(it.weak?' weak':''),it.label);
+      b.type='button';
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click',()=>select(i));
+      chipsEl.appendChild(b);
+    });
+    function select(i){
+      $$('.chip',chipsEl).forEach((c,j)=>c.setAttribute('aria-pressed',i===j));
+      render(items[i]);
+    }
+    select(opts.start||0);
+  }
+
+  /* ---------- 1. entidades del MER ---------- */
+  const ENT=[
+    {n:'TORNEO',t:'f',a:['*id_torneo','nombre','año','semestre','fecha_inicio','fecha_fin','duracion_dias (derivado)'],r:'Entidad central: agrupa equipos (Participar, M:N) y partidos (Tener, 1:N).'},
+    {n:'EQUIPO',t:'f',a:['*id_equipo','nombre','ciudad','fecha_fundacion','escudo_url','colores (multivaluado)'],r:'Lo dirige un técnico (1:1), tiene un estadio sede (N:1), participa en torneos, es local o visitante y puede ser favorito de un usuario.'},
+    {n:'JUGADOR',t:'f',a:['*id_jugador','nombre (compuesto)','nacionalidad','fecha_nacimiento','edad (derivado)','posición'],r:'Se inscribe con un equipo en un torneo (ternaria Inscribir) y realiza participaciones en partidos.'},
+    {n:'PARTIDO',t:'f',a:['*id_partido','fecha','hora','jornada'],r:'Pertenece a un torneo, tiene equipo local y visitante, se juega en un estadio y lo arbitran varios árbitros.'},
+    {n:'ESTADIO',t:'f',a:['*id_estadio','nombre','capacidad','ubicación (compuesto)'],r:'Puede ser sede de varios equipos y sede de varios partidos.'},
+    {n:'TECNICO',t:'f',a:['*id_tecnico','nombre (compuesto)','nacionalidad','fecha_nacimiento'],r:'Dirige a un único equipo (Dirigir, 1:1).'},
+    {n:'ARBITRO',t:'f',a:['*cedula','nombre (compuesto)','ciudad','categoría'],r:'Arbitra partidos con un rol en cada uno (Arbitrar, M:N con atributo rol).'},
+    {n:'PARTICIPACION',t:'f',a:['*id_participacion','titular','minutos_jugados'],r:'Nace de convertir la relación M:N jugador–partido en entidad. De ella dependen los goles y las tarjetas.'},
+    {n:'TIPO_TARJETA',t:'f',a:['*id_tipo','color (amarilla o roja)'],r:'Catálogo de tipos de tarjeta (1:N con TARJETA).'},
+    {n:'USUARIO',t:'f',a:['*id_usuario','usuario','contrasenia (cifrada)','correo','verificado','codigo_verificacion','expira_verificacion'],r:'Cuenta de la app web: un único rol y, opcionalmente, un equipo favorito.'},
+    {n:'ROL',t:'f',a:['*id_rol','nombre_rol'],r:'ADMIN o USUARIO (Tener_rol, 1:N con USUARIO).'},
+    {n:'RESULTADO',t:'d',dep:'PARTIDO',a:['*id_resultado (clave parcial)','goles_local','goles_visitante'],r:'Débil de PARTIDO (identificadora 1:1): no existe resultado sin partido.'},
+    {n:'GOL',t:'d',dep:'PARTICIPACION',a:['*id_gol (clave parcial)','tipo','minuto'],r:'Débil de PARTICIPACION: solo hay gol si el jugador participó. El jugador y el partido se obtienen por la participación.'},
+    {n:'TARJETA',t:'d',dep:'PARTICIPACION',a:['*id_tarjeta (clave parcial)','motivo','minuto'],r:'Débil de PARTICIPACION, con un tipo del catálogo TIPO_TARJETA.'}
+  ];
+  const entDetail=$('#ent-detail');
+  chipSelector($('#ent-chips'),ENT.map(e=>({...e,label:e.n,weak:e.t==='d'})),e=>{
+    entDetail.replaceChildren();
+    entDetail.appendChild(h('h6',null,e.n));
+    const sub=h('div','sub');
+    sub.appendChild(h('span','badge '+(e.t==='f'?'ok':'amber'),e.t==='f'?'entidad fuerte':'entidad débil'));
+    if(e.dep) sub.appendChild(h('span','badge','depende de '+e.dep));
+    entDetail.appendChild(sub);
+    const list=h('div','attr-list');
+    e.a.forEach(x=>{
+      const key=x.startsWith('*');
+      list.appendChild(h('span','attr'+(key?' key':''),key?x.slice(1)+' 🔑':x));
+    });
+    entDetail.appendChild(list);
+    entDetail.appendChild(h('div','sub',e.r));
+  });
+
+  /* ---------- 2. reglas de negocio ---------- */
+  const RN=[
+    ['RN-01','El equipo local y el visitante son distintos y ambos participan en el torneo del partido'],
+    ['RN-02','Un equipo no juega dos partidos en la misma jornada de un torneo'],
+    ['RN-03','Un jugador tiene una sola participación por partido'],
+    ['RN-04','Solo participa quien está inscrito en uno de los dos equipos del partido, en ese torneo'],
+    ['RN-05','En un torneo, un jugador está inscrito en un solo equipo a la vez; el dorsal es único por equipo y torneo'],
+    ['RN-06','El resultado solo existe si el partido fue disputado y coincide con los goles registrados'],
+    ['RN-07','Todo gol se cuenta a favor del equipo de quien lo anota (no se distinguen autogoles)'],
+    ['RN-08','Cada partido tiene al menos un árbitro (el central); los demás roles son opcionales'],
+    ['RN-09','Minutos jugados entre 0 y 120; minuto de gol o tarjeta entre 1 y 120'],
+    ['RN-10','Las tarjetas son de un tipo del catálogo (amarilla o roja); un jugador puede recibir varias en un partido'],
+    ['RN-11','La fecha de fin del torneo es posterior o igual a la de inicio; la inscripción queda dentro del torneo'],
+    ['RN-12','Tabla de posiciones: victoria = 3 puntos, empate = 1, derrota = 0'],
+    ['RN-13','Jugador, técnico y árbitro son categorías disjuntas'],
+    ['RN-14','Todo usuario tiene exactamente un rol y, opcionalmente, un equipo favorito']
+  ];
+  function simpleFilter(inputEl,bodyEl,countEl,rows,cellsFn,label){
+    function draw(){
+      const q=inputEl.value.trim().toLowerCase();
+      const out=rows.filter(r=>!q||r.join(' ').toLowerCase().includes(q));
+      bodyEl.replaceChildren();
+      out.forEach(r=>{
+        const tr=h('tr');
+        cellsFn(r).forEach(c=>tr.appendChild(c));
+        bodyEl.appendChild(tr);
+      });
+      if(!out.length){
+        const tr=h('tr'),td=h('td',null,'Sin resultados.');
+        td.colSpan=3;tr.appendChild(td);bodyEl.appendChild(tr);
+      }
+      countEl.textContent=out.length+' de '+rows.length+' '+label;
+    }
+    inputEl.addEventListener('input',draw);
+    draw();
+  }
+  simpleFilter($('#rule-search'),$('#rule-body'),$('#rule-count'),RN,
+    r=>[h('td','mono',r[0]),h('td',null,r[1])],'reglas');
+
+  /* ---------- 3. 22 tablas ---------- */
+  const TBL=[
+    ['TECNICO','id_tecnico','—'],
+    ['ESTADIO','id_estadio','—'],
+    ['EQUIPO','id_equipo','id_tecnico (UNIQUE), id_sede → ESTADIO'],
+    ['EQUIPO_COLOR','(id_equipo, color)','id_equipo'],
+    ['TORNEO','id_torneo','—'],
+    ['EQUIPO_TORNEO','(id_torneo, id_equipo)','id_torneo, id_equipo'],
+    ['JUGADOR','id_jugador','—'],
+    ['ATACANTE','id_jugador','id_jugador → JUGADOR'],
+    ['MEDIOCAMPISTA','id_jugador','id_jugador → JUGADOR'],
+    ['DEFENSA','id_jugador','id_jugador → JUGADOR'],
+    ['PORTERO','id_jugador','id_jugador → JUGADOR'],
+    ['INSCRIPCION','(id_equipo, id_torneo, id_jugador)','las tres'],
+    ['ARBITRO','cedula','—'],
+    ['PARTIDO','id_partido','id_estadio, id_torneo, id_local, id_visitante'],
+    ['RESULTADO','(id_partido, id_resultado)','id_partido'],
+    ['ARBITRAJE','(cedula, id_partido)','cedula, id_partido'],
+    ['PARTICIPACION','id_participacion','id_jugador, id_partido'],
+    ['GOL','(id_participacion, id_gol)','id_participacion'],
+    ['TIPO_TARJETA','id_tipo','—'],
+    ['TARJETA','(id_participacion, id_tarjeta)','id_participacion, id_tipo'],
+    ['ROL','id_rol','—'],
+    ['USUARIO','id_usuario','id_rol, id_equipo_favorito (opcional)']
+  ];
+  simpleFilter($('#tbl-search'),$('#tbl-body'),$('#tbl-count'),TBL,
+    r=>[h('td','mono',r[0]),h('td','mono',r[1]),h('td','mono',r[2])],'tablas');
+
+  /* ---------- 4. operaciones de álgebra ---------- */
+  const OPS=[
+    ['Selección (σ)','1 – 6',6,'WHERE','Filtra filas que cumplen una condición.'],
+    ['Proyección (π)','7 – 13',7,'SELECT DISTINCT','Elige columnas y elimina duplicados.'],
+    ['Renombrar (ρ) y producto (×)','14 – 17',4,'AS y CROSS JOIN','Cambia nombres y combina todas las filas de dos tablas.'],
+    ['Unión, intersección, diferencia','18 – 25',8,'UNION, INTERSECT, MINUS','Combina conjuntos de filas compatibles.'],
+    ['Join natural y theta','26 – 35',10,'JOIN … ON','Une tablas por una condición.'],
+    ['Join externo izquierdo','36 – 38',3,'LEFT OUTER JOIN','Conserva las filas sin pareja de la tabla izquierda.'],
+    ['Agrupamiento','39 – 46',8,'GROUP BY y HAVING','Agrega valores (contar, sumar) por grupos.'],
+    ['División (÷)','47 – 49',3,'GROUP BY + HAVING COUNT','Responde preguntas de “todos los…”.'],
+    ['Operaciones combinadas','50',1,'Subconsulta con MINUS','Mezcla varias operaciones en una sola consulta.']
+  ];
+  const opsBars=$('#ops-bars'), opsDetail=$('#ops-detail'), maxOps=Math.max(...OPS.map(o=>o[2]));
+  const opRows=[];
+  OPS.forEach((o,i)=>{
+    const row=h('div','bar-row clickable');
+    row.tabIndex=0;row.setAttribute('role','button');
+    row.appendChild(h('span','lbl',o[0]));
+    const tr=h('div','bar-track'),fill=h('div','bar-fill');
+    fill.dataset.w=(o[2]/maxOps*100)+'%';
+    tr.appendChild(fill);row.appendChild(tr);
+    row.appendChild(h('span','num','Ej. '+o[1]));
+    function pick(){
+      opRows.forEach(r=>r.classList.remove('on'));
+      row.classList.add('on');
+      opsDetail.replaceChildren();
+      opsDetail.appendChild(h('h6',null,o[0]));
+      opsDetail.appendChild(h('div','sub',o[4]));
+      const sub=h('div','sub');
+      sub.appendChild(h('span','badge ok','SQL: '+o[3]));
+      sub.appendChild(h('span','badge',o[2]+(o[2]===1?' ejercicio':' ejercicios')));
+      opsDetail.appendChild(sub);
+    }
+    row.addEventListener('click',pick);
+    row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+    opRows.push(row);opsBars.appendChild(row);
+    if(i===0) pick();
+  });
+
+  /* ---------- 5. ejemplos álgebra vs SQL ---------- */
+  const EX=[
+    {label:'Ej. 1 · Selección',
+     d:'Estadios con capacidad mayor a 30.000 personas.',
+     a:'σ capacidad > 30000 (ESTADIO)',
+     s:'SELECT *\nFROM estadio\nWHERE capacidad > 30000;'},
+    {label:'Ej. 45 · Agrupamiento',
+     d:'Jugadores que han marcado 4 goles o más.',
+     a:'GOLES = G id_jugador ℑ COUNT(id_gol) AS goles (PARTICIPACION ⋈ GOL)\nπ nombres, apellidos, goles ( σ goles ≥ 4 (JUGADOR ⋈ GOLES) )',
+     s:'SELECT j.nombres, j.apellidos, COUNT(g.id_gol) AS goles\nFROM jugador j\nJOIN participacion pa ON pa.id_jugador = j.id_jugador\nJOIN gol g ON g.id_participacion = pa.id_participacion\nGROUP BY j.id_jugador, j.nombres, j.apellidos\nHAVING COUNT(g.id_gol) >= 4\nORDER BY goles DESC;'},
+    {label:'Ej. 50 · Combinada',
+     d:'Equipos de Bogotá que no han ganado ningún partido como visitante.',
+     a:"BOG = π id_equipo ( σ ciudad_equipo = 'Bogotá' (EQUIPO) )\nGANARON = ρ G(id_equipo) ( π id_visitante ( σ goles_visitante > goles_local (PARTIDO ⋈ RESULTADO) ) )\nπ nombre_equipo ( EQUIPO ⋈ (BOG − GANARON) )",
+     s:"SELECT nombre_equipo\nFROM equipo\nWHERE id_equipo IN (SELECT id_equipo FROM equipo WHERE ciudad_equipo = 'Bogotá'\n                    MINUS\n                    SELECT p.id_visitante\n                    FROM partido p JOIN resultado r ON r.id_partido = p.id_partido\n                    WHERE r.goles_visitante > r.goles_local);"}
+  ];
+  chipSelector($('#ex-chips'),EX,ex=>{
+    $('#ex-desc').textContent='Enunciado: '+ex.d;
+    $('#ex-alg').textContent=ex.a;
+    $('#ex-sql').textContent=ex.s;
+  });
+  $$('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
+    const txt=$('#'+b.dataset.copy).textContent;
+    try{ await navigator.clipboard.writeText(txt); b.textContent='¡Copiado!'; }
+    catch(e){ b.textContent='Selecciona y copia'; }
+    setTimeout(()=>b.textContent='Copiar',1600);
+  }));
+
+  /* ---------- 6. comparativas SO y RDBMS ---------- */
+  function comparison(chipsId,detailId,labels,options,winner){
+    const detail=$('#'+detailId);
+    chipSelector($('#'+chipsId),options.map(o=>({...o,label:o.n})),o=>{
+      detail.replaceChildren();
+      detail.appendChild(h('h6',null,o.n));
+      const sub=h('div','sub');
+      sub.appendChild(h('span','badge '+(o.n===winner?'ok':''),o.n===winner?'✓ elegida':'descartada'));
+      detail.appendChild(sub);
+      const t=h('table'), tb=h('tbody');
+      labels.forEach((l,i)=>{
+        const tr=h('tr');
+        tr.appendChild(h('td',null,l));
+        tr.appendChild(h('td',null,o.v[i]));
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb);
+      const w=h('div','tbl-wrap');w.appendChild(t);detail.appendChild(w);
+    });
+  }
+  comparison('so-chips','so-detail',
+    ['Soporte de Oracle AI Database Free','Preparación para la base de datos','Actualizaciones','Costo','Familiaridad del equipo'],
+    [
+      {n:'Oracle Linux 9',v:['Oficial','Un solo comando','Hasta junio de 2032 (ampliado a 2035)','Gratis','Menor (familia Red Hat)']},
+      {n:'RHEL 9',v:['Oficial','Manual','Hasta mayo de 2032','Requiere suscripción','Menor']},
+      {n:'Rocky Linux 9',v:['No figura','Sin pasos oficiales','Igual que RHEL','Gratis','Menor']},
+      {n:'Ubuntu Server 24.04',v:['Solo el cliente, no el servidor','Sin pasos equivalentes','Hasta mayo de 2029','Gratis','La más conocida']}
+    ],'Oracle Linux 9');
+  comparison('db-chips','db-detail',
+    ['Oracle Linux 9','Tipos NUMBER y VARCHAR2','SQL Developer','Costo','Límites de la edición','Familiaridad'],
+    [
+      {n:'Oracle AI Database 26ai Free',v:['Soporte oficial','Nativos','Funciona completo','Gratis','2 GB de RAM, 2 hilos, 12 GB de datos','La usamos en clase']},
+      {n:'MySQL 8.4 LTS',v:['Desde repositorios','Hay que adaptar','Con funciones limitadas','Gratis','Ninguno','Poca']},
+      {n:'PostgreSQL 18',v:['Desde repositorios','Hay que adaptar','Con funciones limitadas','Gratis','Ninguno','Poca']},
+      {n:'MariaDB 11.8 LTS',v:['Desde repositorios','Solo en modo de compatibilidad','Con funciones limitadas','Gratis','Ninguno','Poca']}
+    ],'Oracle AI Database 26ai Free');
+
+  /* ---------- 7. checklist de instalación ---------- */
+  const STEPS=[
+    ['Descargar el RPM de Oracle AI Database Free para Oracle Linux 9 (≈ 1,5 GB)',null],
+    ['Activar SSH en la VM','sudo systemctl enable --now sshd'],
+    ['Copiar el instalador desde Windows','scp -P 2222 oracle-ai-database-free-26ai-23.26.3-1.el9.x86_64.rpm bd1@localhost:/tmp/'],
+    ['Instalar el paquete de preparación (36 paquetes que Oracle necesita)','sudo dnf install -y oracle-ai-database-preinstall-26ai'],
+    ['Instalar la base de datos','sudo dnf -y localinstall /tmp/oracle-ai-database-free-26ai-23.26.3-1.el9.x86_64.rpm'],
+    ['Configurar: contraseñas, listener y creación de FREE y FREEPDB1','sudo /etc/init.d/oracle-free-26ai configure'],
+    ['Arrancar la instancia','sqlplus / as sysdba\nSTARTUP;'],
+    ['Abrir el puerto 1521 en el firewall','sudo firewall-cmd --permanent --add-port=1521/tcp\nsudo firewall-cmd --reload'],
+    ['Conectar SQL Developer: Liga_System (crea el usuario LIGA) y Liga_Normal (tablas, datos y consultas)',null]
+  ];
+  const stepsEl=$('#steps'), bar=$('#steps-bar'), cnt=$('#steps-count');
+  function updateSteps(){
+    const done=$$('.step.done',stepsEl).length;
+    bar.style.width=(done/STEPS.length*100)+'%';
+    cnt.textContent=done+' de '+STEPS.length+' pasos'+(done===STEPS.length?' — ¡instalación completa!':'');
+  }
+  STEPS.forEach((s,i)=>{
+    const li=h('li','step');
+    li.tabIndex=0;li.setAttribute('role','checkbox');li.setAttribute('aria-checked','false');
+    li.appendChild(h('span','box',''));
+    const txt=h('div','txt');
+    txt.appendChild(h('div','st',(i+1)+'. '+s[0]));
+    if(s[1]) txt.appendChild(h('code',null,s[1]));
+    li.appendChild(txt);
+    function flip(){
+      const on=li.classList.toggle('done');
+      li.setAttribute('aria-checked',on);
+      $('.box',li).textContent=on?'✓':'';
+      updateSteps();
+    }
+    li.addEventListener('click',flip);
+    li.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();}});
+    stepsEl.appendChild(li);
+  });
+  updateSteps();
+
+  /* ---------- 8. EDT ---------- */
+  const EDT=[
+    ['1. Gestión del proyecto',['Acta','Interesados','EDT','Cronograma','Presupuesto','Seguimiento y control','Acta de cierre']],
+    ['2. Fase 1: Diseño',['Propuesta','Supuestos','MER Chen','MER extendido','Crow’s Foot','Modelo relacional','Diccionario de datos','Álgebra relacional']],
+    ['3. Fase 2: Infraestructura',['Selección del SO','Implementación de la VM','Selección del RDBMS','Implementación del RDBMS']],
+    ['4. Fase 2: Base de datos física',['Script de creación','Script de inserción','Scripts varios','README']],
+    ['5. Fase 2: Aplicación web',['Backend (Spring Boot + JDBC)','Seguridad y usuarios','Frontend (Angular)','Integración y pruebas']],
+    ['6. Entrega y cierre',['Repositorio en GitHub','Documento general','Video de demostración','Sustentación']]
+  ];
+  const edtDetail=$('#edt-detail');
+  chipSelector($('#edt-chips'),EDT.map(e=>({label:e[0],items:e[1]})),e=>{
+    edtDetail.replaceChildren();
+    edtDetail.appendChild(h('h6',null,e.label));
+    edtDetail.appendChild(h('div','sub',e.items.length+' paquetes de trabajo'));
+    const l=h('div','attr-list');
+    e.items.forEach(x=>l.appendChild(h('span','attr',x)));
+    edtDetail.appendChild(l);
+  });
+
+  /* ---------- 9. presupuesto ---------- */
+  const fmt=n=>'$ '+n.toLocaleString('es-CO');
+  const BUD=[
+    ['Horas de desarrollo (×3 integrantes)',4800000,480000,480000,5760000],
+    ['Gerente de proyecto',1200000,120000,120000,1440000],
+    ['Equipos y licencias (VM, RDBMS, GitHub)',0,600000,60000,660000],
+    ['Internet y energía',350000,100000,50000,500000],
+    ['Transporte',300000,0,50000,350000],
+    ['Otros gastos y material adicional',150000,0,30000,180000]
+  ];
+  const budBars=$('#bud-bars'), budDetail=$('#bud-detail'), maxBud=BUD[0][4];
+  const budRows=[];
+  BUD.forEach((b,i)=>{
+    const row=h('div','bar-row clickable');
+    row.tabIndex=0;row.setAttribute('role','button');
+    row.appendChild(h('span','lbl',b[0]));
+    const tr=h('div','bar-track'),fill=h('div','bar-fill');
+    fill.dataset.w=(b[4]/maxBud*100)+'%';
+    tr.appendChild(fill);row.appendChild(tr);
+    row.appendChild(h('span','num',(b[4]/1000000).toFixed(2).replace('.',',')+' M'));
+    function pick(){
+      budRows.forEach(r=>r.classList.remove('on'));
+      row.classList.add('on');
+      budDetail.replaceChildren();
+      budDetail.appendChild(h('h6',null,b[0]));
+      const sub=h('div','sub');
+      sub.appendChild(h('span','badge','Directos '+fmt(b[1])));
+      sub.appendChild(h('span','badge','Indirectos '+fmt(b[2])));
+      sub.appendChild(h('span','badge','Reserva '+fmt(b[3])));
+      sub.appendChild(h('span','badge ok','Total '+fmt(b[4])));
+      budDetail.appendChild(sub);
+    }
+    row.addEventListener('click',pick);
+    row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+    budRows.push(row);budBars.appendChild(row);
+    if(i===0) pick();
+  });
+
+  /* ---------- animar barras al abrir ---------- */
+  function fillBars(root){
+    $$('.bar-fill',root).forEach(f=>{
+      if(reduce){f.style.width=f.dataset.w;return;}
+      f.style.width='0';
+      requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=f.dataset.w));
+    });
+  }
+  $$('details.acc').forEach(d=>{
+    if($('.bar-fill',d)){
+      d.addEventListener('toggle',()=>{ if(d.open) fillBars(d); });
+      if(d.open) fillBars(d);
+    }
+  });
+
+
+  /* =====================================================
+     VISTA GENERAL: otros ejemplos
+     ===================================================== */
+  const vP=$('#view-p'), vG=$('#view-g');
+  function setView(v){
+    document.body.dataset.view=v;
+    vP.setAttribute('aria-pressed',v==='p');
+    vG.setAttribute('aria-pressed',v==='g');
+    syncToggle();
+  }
+  vP.addEventListener('click',()=>setView('p'));
+  vG.addEventListener('click',()=>setView('g'));
+  setView('p');
+
+  function codeBox(label,text){
+    const box=h('div','code-box'), bar=h('div','code-bar');
+    bar.appendChild(h('span',null,label));
+    const b=h('button','btn','Copiar');b.type='button';
+    b.addEventListener('click',async()=>{
+      try{await navigator.clipboard.writeText(text);b.textContent='¡Copiado!';}
+      catch(e){b.textContent='Selecciona y copia';}
+      setTimeout(()=>b.textContent='Copiar',1600);
+    });
+    bar.appendChild(b);box.appendChild(bar);box.appendChild(h('pre',null,text));
+    return box;
+  }
+  function miniTable(t){
+    const w=h('div','mini');
+    w.appendChild(h('div','mini-title',t.name));
+    const wrap=h('div','tbl-wrap'),tb=h('table'),th=h('thead'),trh=h('tr');
+    t.cols.forEach(c=>trh.appendChild(h('th',null,c.startsWith('*')?'🔑 '+c.slice(1):c)));
+    th.appendChild(trh);tb.appendChild(th);
+    const body=h('tbody');
+    t.rows.forEach(r=>{const tr=h('tr');r.forEach(v=>tr.appendChild(h('td',null,v)));body.appendChild(tr);});
+    tb.appendChild(body);wrap.appendChild(tb);w.appendChild(wrap);
+    return w;
+  }
+
+  /* --- dominios de ejemplo --- */
+  const DOM=[
+    {n:'Biblioteca',c:'Entidad débil y M:N con atributos',
+     e:['LIBRO','AUTOR','EJEMPLAR (débil de LIBRO)','SOCIO','PRESTAMO'],
+     r:['AUTOR – LIBRO: M:N (escribir)','LIBRO – EJEMPLAR: 1:N identificadora','SOCIO – EJEMPLAR: M:N, resuelta en PRESTAMO (fecha_prestamo, fecha_devolucion)'],
+     d:'Una obra no es lo mismo que una copia física. Separar LIBRO de EJEMPLAR permite saber cuántas copias existen y cuál está prestada. El ejemplar no tiene sentido sin su libro, por eso es débil.'},
+    {n:'Hospital',c:'Relación M:N convertida en entidad',
+     e:['PACIENTE','MEDICO','ESPECIALIDAD','CONSULTORIO','CITA'],
+     r:['PACIENTE – MEDICO: M:N, resuelta en CITA (fecha, hora, motivo)','MEDICO – ESPECIALIDAD: N:1','CITA – CONSULTORIO: N:1'],
+     d:'La cita es un evento con fecha al que luego se le cuelgan diagnóstico y fórmulas, así que se vuelve entidad (como PARTICIPACION en la liga). La edad del paciente es un atributo derivado: se calcula desde la fecha de nacimiento.'},
+    {n:'Tienda en línea',c:'Atributos multivaluados e historial',
+     e:['CLIENTE','DIRECCION','PRODUCTO','CATEGORIA','PEDIDO','LINEA_PEDIDO'],
+     r:['CLIENTE – DIRECCION: 1:N (multivaluado hecho entidad)','PEDIDO – PRODUCTO: M:N, resuelta en LINEA_PEDIDO (cantidad, precio_venta)','PRODUCTO – CATEGORIA: N:1'],
+     d:'Un cliente puede tener varias direcciones, así que no cabe como un solo atributo. El precio_venta se guarda en la línea del pedido para que una compra antigua conserve el precio que se pagó, aunque el producto suba después.'},
+    {n:'Universidad',c:'Relación ternaria y especialización',
+     e:['PERSONA','ESTUDIANTE','PROFESOR','CURSO','PERIODO'],
+     r:['PERSONA se especializa en ESTUDIANTE y PROFESOR','ESTUDIANTE – CURSO – PERIODO: ternaria (nota)','PROFESOR – CURSO: M:N'],
+     d:'La nota depende de la combinación estudiante + curso + periodo; con una relación binaria no se podría registrar que alguien repite un curso. Aquí la especialización es solapada (un profesor puede ser estudiante de posgrado), a diferencia de los jugadores de la liga, que eran disjuntos.'}
+  ];
+  const domDetail=$('#dom-detail');
+  chipSelector($('#dom-chips'),DOM.map(d=>({...d,label:d.n})),d=>{
+    domDetail.replaceChildren();
+    domDetail.appendChild(h('h6',null,d.n));
+    const sub=h('div','sub');sub.appendChild(h('span','badge amber',d.c));domDetail.appendChild(sub);
+    domDetail.appendChild(h('div','sub','Entidades'));
+    const l=h('div','attr-list');d.e.forEach(x=>l.appendChild(h('span','attr',x)));domDetail.appendChild(l);
+    domDetail.appendChild(h('div','sub','Relaciones'));
+    const ul=h('ul');ul.style.cssText='margin:6px 0 10px;padding-left:20px;color:var(--muted);font-size:14px';
+    d.r.forEach(x=>ul.appendChild(h('li',null,x)));domDetail.appendChild(ul);
+    domDetail.appendChild(h('div','sub','Decisión de diseño'));
+    domDetail.appendChild(h('div',null,d.d));
+  });
+
+  /* --- normalización paso a paso --- */
+  const NF=[
+    {label:'0 · Sin normalizar',t:'Tabla original: todo en una sola',
+     n:'Hay celdas con varios valores (productos, precios y cantidades juntos). No se puede filtrar ni contar bien: viola la 1FN.',
+     tb:[{name:'PEDIDOS',cols:['*id_pedido','cliente','ciudad','productos','precios','cantidades'],
+       rows:[['1','Ana','Bogotá','Mouse, Teclado','30000, 80000','2, 1'],['2','Ana','Bogotá','Monitor','450000','1'],['3','Luis','Cali','Mouse','30000','3']]}]},
+    {label:'1 · 1FN',t:'Un solo valor por celda',
+     n:'Cada producto pasa a su propia fila y la llave es (id_pedido, producto). Pero cliente y ciudad dependen solo de id_pedido, y precio solo de producto: dependencias parciales (viola la 2FN).',
+     tb:[{name:'PEDIDO_LINEA',cols:['*id_pedido','*producto','cliente','ciudad','precio','cantidad'],
+       rows:[['1','Mouse','Ana','Bogotá','30000','2'],['1','Teclado','Ana','Bogotá','80000','1'],['2','Monitor','Ana','Bogotá','450000','1'],['3','Mouse','Luis','Cali','30000','3']]}]},
+    {label:'2 · 2FN',t:'Separar lo que depende de parte de la llave',
+     n:'Ahora cada dato depende de la llave completa de su tabla. Queda un problema: la ciudad depende del cliente, no del pedido. Ana y Bogotá se repiten (dependencia transitiva, viola la 3FN).',
+     tb:[{name:'PEDIDO',cols:['*id_pedido','cliente','ciudad'],rows:[['1','Ana','Bogotá'],['2','Ana','Bogotá'],['3','Luis','Cali']]},
+         {name:'PRODUCTO',cols:['*producto','precio'],rows:[['Mouse','30000'],['Teclado','80000'],['Monitor','450000']]},
+         {name:'LINEA',cols:['*id_pedido','*producto','cantidad'],rows:[['1','Mouse','2'],['1','Teclado','1'],['2','Monitor','1'],['3','Mouse','3']]}]},
+    {label:'3 · 3FN',t:'Eliminar dependencias transitivas',
+     n:'Cada hecho vive en un solo lugar: si Ana cambia de ciudad se actualiza una fila, no todas sus compras. Si el precio puede cambiar con el tiempo, guarda además el precio de venta en LINEA para conservar el historial.',
+     tb:[{name:'CLIENTE',cols:['*cliente','ciudad'],rows:[['Ana','Bogotá'],['Luis','Cali']]},
+         {name:'PEDIDO',cols:['*id_pedido','cliente'],rows:[['1','Ana'],['2','Ana'],['3','Luis']]},
+         {name:'PRODUCTO',cols:['*producto','precio'],rows:[['Mouse','30000'],['Teclado','80000'],['Monitor','450000']]},
+         {name:'LINEA',cols:['*id_pedido','*producto','cantidad'],rows:[['1','Mouse','2'],['1','Teclado','1'],['2','Monitor','1'],['3','Mouse','3']]}]}
+  ];
+  const nfDetail=$('#nf-detail');
+  chipSelector($('#nf-chips'),NF,st=>{
+    nfDetail.replaceChildren();
+    nfDetail.appendChild(h('h6',null,st.t));
+    nfDetail.appendChild(h('div','sub',st.n));
+    st.tb.forEach(t=>nfDetail.appendChild(miniTable(t)));
+  });
+
+  /* --- consultas de la tienda --- */
+  const GS=[
+    {label:'Filtrar y ordenar',q:'¿Qué productos cuestan más de 50.000, del más caro al más barato?',
+     a:'σ precio > 50000 (PRODUCTO)  →  ordenar por precio',
+     s:'SELECT nombre, precio\nFROM producto\nWHERE precio > 50000\nORDER BY precio DESC;',
+     w:'WHERE filtra filas (selección) y ORDER BY solo cambia el orden de presentación.'},
+    {label:'Agrupar y sumar',q:'¿Cuánto se ha vendido en cada ciudad?',
+     a:'ciudad G SUM(cantidad × precio) (CLIENTE ⋈ PEDIDO ⋈ LINEA ⋈ PRODUCTO)',
+     s:'SELECT c.ciudad, SUM(l.cantidad * p.precio) AS total\nFROM cliente c\nJOIN pedido pe ON pe.id_cliente = c.id_cliente\nJOIN linea l ON l.id_pedido = pe.id_pedido\nJOIN producto p ON p.id_producto = l.id_producto\nGROUP BY c.ciudad\nORDER BY total DESC;',
+     w:'Los JOIN reúnen los datos de cuatro tablas y GROUP BY colapsa las filas por ciudad para calcular el total.'},
+    {label:'“Sin…” con LEFT JOIN',q:'¿Qué clientes nunca han hecho un pedido?',
+     a:'π nombre (CLIENTE ⟕ PEDIDO)  donde id_pedido es nulo',
+     s:'SELECT c.nombre\nFROM cliente c\nLEFT JOIN pedido pe ON pe.id_cliente = c.id_cliente\nWHERE pe.id_pedido IS NULL;',
+     w:'El LEFT JOIN conserva a los clientes sin pareja; los que no tienen pedido quedan con id_pedido nulo.'},
+    {label:'“Nunca” con diferencia',q:'¿Qué productos nunca se han vendido?',
+     a:'π id_producto (PRODUCTO) − π id_producto (LINEA)',
+     s:'SELECT id_producto FROM producto\nMINUS\nSELECT id_producto FROM linea;',
+     w:'Patrón de la diferencia: el universo (todos los productos) menos los que sí aparecen en alguna venta. En otros motores se llama EXCEPT.'},
+    {label:'“Todos los…” con división',q:'¿Qué clientes han comprado todos los productos del catálogo?',
+     a:'π id_cliente, id_producto (PEDIDO ⋈ LINEA) ÷ π id_producto (PRODUCTO)',
+     s:'SELECT pe.id_cliente\nFROM pedido pe\nJOIN linea l ON l.id_pedido = pe.id_pedido\nGROUP BY pe.id_cliente\nHAVING COUNT(DISTINCT l.id_producto) = (SELECT COUNT(*) FROM producto);',
+     w:'La división se traduce a GROUP BY + HAVING: el cliente debe haber comprado tantos productos distintos como tiene el catálogo.'},
+    {label:'Modificar con transacción',q:'Registrar una venta y descontarla del inventario sin que quede a medias.',
+     a:'No aplica: el álgebra relacional solo consulta.',
+     s:'INSERT INTO linea (id_pedido, id_producto, cantidad)\nVALUES (10, 3, 2);\n\nUPDATE producto\nSET stock = stock - 2\nWHERE id_producto = 3;\n\nCOMMIT;   -- o ROLLBACK; si algo falló',
+     w:'Dos cambios que dependen uno del otro van en una transacción: se confirman juntos con COMMIT o se deshacen juntos con ROLLBACK. Este ejemplo supone una columna stock en PRODUCTO.'}
+  ];
+  const gsDetail=$('#gs-detail');
+  chipSelector($('#gs-chips'),GS,g=>{
+    gsDetail.replaceChildren();
+    gsDetail.appendChild(h('h6',null,g.label));
+    gsDetail.appendChild(h('div','sub','Pregunta: '+g.q));
+    gsDetail.appendChild(codeBox('Álgebra relacional',g.a));
+    gsDetail.appendChild(codeBox('SQL (Oracle)',g.s));
+    const how=h('div','sub','Cómo se lee: '+g.w);how.style.marginTop='12px';
+    gsDetail.appendChild(how);
+  });
+
+  /* --- ciclo de vida --- */
+  const LIFE=[
+    {label:'1 · Requisitos',w:'Se define qué debe hacer el sistema y para quién.',o:'Lista de requerimientos funcionales.',x:'“Un socio reserva una clase y el administrador ve la asistencia.”'},
+    {label:'2 · Modelo conceptual',w:'Se dibuja el MER con entidades, atributos y relaciones.',o:'Diagrama entidad-relación y documento de supuestos.',x:'SOCIO, CLASE, ENTRENADOR y RESERVA como entidad entre socio y clase.'},
+    {label:'3 · Modelo lógico',w:'Se pasa a tablas y se normaliza hasta 3FN.',o:'Esquema relacional con llaves primarias y foráneas.',x:'Tablas SOCIO, CLASE, RESERVA con la llave (id_socio, id_clase).'},
+    {label:'4 · Modelo físico',w:'Se escriben los scripts con tipos de datos, restricciones e índices.',o:'Scripts de creación e inserción.',x:'CREATE TABLE con UNIQUE en el correo del socio.'},
+    {label:'5 · Infraestructura',w:'Se elige y configura el sistema operativo, el gestor y la red.',o:'Máquina virtual o servidor funcionando y documentado.',x:'Servidor Linux con PostgreSQL y el puerto abierto solo a la aplicación.'},
+    {label:'6 · Backend',w:'Se programa la API que accede a la base, con seguridad y roles.',o:'Servicio que expone los datos de forma controlada.',x:'Endpoint “reservar clase” que valida cupos antes de insertar.'},
+    {label:'7 · Frontend',w:'Se construyen las pantallas que usa la gente.',o:'Interfaz conectada al backend.',x:'Calendario de clases con botón de reservar.'},
+    {label:'8 · Pruebas',w:'Se prueba con datos reales y casos límite.',o:'Casos de prueba y errores corregidos.',x:'Reservar una clase llena, o dos veces la misma.'},
+    {label:'9 · Entrega y mantenimiento',w:'Se documenta, se entrega y se planean respaldos.',o:'Repositorio, README y documento general.',x:'Guía para levantar el sistema y copia de seguridad semanal.'}
+  ];
+  const lifeDetail=$('#life-detail');
+  chipSelector($('#life-chips'),LIFE,l=>{
+    lifeDetail.replaceChildren();
+    lifeDetail.appendChild(h('h6',null,l.label));
+    lifeDetail.appendChild(h('div',null,l.w));
+    const sub=h('div','sub');sub.style.marginTop='10px';
+    sub.appendChild(h('span','badge ok','Entregable: '+l.o));
+    lifeDetail.appendChild(sub);
+    lifeDetail.appendChild(h('div','sub','Ejemplo (gimnasio): '+l.x));
+  });
+
+  /* --- matriz de criterios --- */
+  const CRIT=[['Costo',3,[5,5,5]],['Facilidad de instalación',2,[3,3,5]],['Crece si aumentan los usuarios',3,[5,4,2]],['Herramientas que el equipo ya conoce',2,[2,4,3]]];
+  const scoreBody=$('#score-body');
+  CRIT.forEach(c=>{
+    const tr=h('tr');
+    tr.appendChild(h('td',null,c[0]));
+    [c[1],...c[2]].forEach((v,j)=>{
+      const td=h('td'),inp=document.createElement('input');
+      inp.type='number';inp.value=v;inp.min=j===0?0:1;inp.max=j===0?10:5;
+      inp.setAttribute('aria-label',(j===0?'Peso de ':'Puntaje de ')+c[0]);
+      inp.addEventListener('input',calcScore);
+      td.appendChild(inp);tr.appendChild(td);
+    });
+    scoreBody.appendChild(tr);
+  });
+  function calcScore(){
+    const rows=$$('tr',scoreBody), tot=[0,0,0];
+    rows.forEach(r=>{
+      const ins=$$('input',r), w=+ins[0].value||0;
+      for(let j=0;j<3;j++) tot[j]+=w*(+ins[j+1].value||0);
+    });
+    tot.forEach((t,j)=>$('#sc-'+j).textContent=t);
+    const names=['PostgreSQL','MySQL','SQLite'], max=Math.max(...tot);
+    const win=names.filter((n,j)=>tot[j]===max);
+    $('#score-win').textContent=max>0?'Mejor puntaje: '+win.join(' y ')+' ('+max+' puntos). Si cambian tus criterios, cambia el resultado.':'';
+  }
+  calcScore();
+
+  /* --- calculadora de presupuesto --- */
+  const cD=$('#c-dir'),cI=$('#c-ind'),cR=$('#c-res'),cOut=$('#calc-out');
+  function calcBud(){
+    const d=Math.max(0,+cD.value||0), i=d*(Math.max(0,+cI.value||0)/100), r=d*(Math.max(0,+cR.value||0)/100), t=d+i+r;
+    cOut.replaceChildren();
+    const sub=h('div','sub');
+    sub.appendChild(h('span','badge','Directos '+fmt(Math.round(d))));
+    sub.appendChild(h('span','badge','Indirectos '+fmt(Math.round(i))));
+    sub.appendChild(h('span','badge','Reserva '+fmt(Math.round(r))));
+    cOut.appendChild(sub);
+    const tot=h('div',null);
+    tot.appendChild(h('span','badge ok','Total '+fmt(Math.round(t))));
+    tot.appendChild(h('span','badge amber','Meta al 90 %: '+fmt(Math.round(t*0.9))));
+    cOut.appendChild(tot);
+  }
+  [cD,cI,cR].forEach(x=>x.addEventListener('input',calcBud));
+  calcBud();
+
+  syncToggle();
+})();
+</script>
 
 </body>
 </html>
